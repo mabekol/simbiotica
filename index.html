@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piscicultura Simbiótica Interactiva para Cimitarra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices: 
+        - Introducción: Texto, beneficios clave con iconos Unicode. Interacción: Toggle para detalles. Meta: Informar/Enganchar.
+        - Principios: Texto, diagramas HTML/CSS de ciclos de nutrientes. Interacción: Click en términos. Meta: Explicar.
+        - Tipos de Sistemas: Texto, ventajas en listas interactivas. Interacción: Botones para detalles. Meta: Comparar.
+        - Implementación: Texto enfocado en adaptar piscinas existentes. Tabla de insumos. Interacción: Toggle para pasos. Meta: Guiar. (Gráfico de tipos de estanques eliminado).
+        - Especies: Tabla 3 (Peces) y Tabla 4 (Plantas) como gráficos de barras comparativos (Chart.js) y tablas HTML interactivas. Interacción: Filtros simples en tablas, selección en gráficos. Meta: Comparar/Seleccionar.
+        - Manejo Diario: Tabla 5 (Calidad Agua) como gráfico de rangos (Chart.js) y tabla HTML interactiva. Tabla 6 (Carbono) como tabla HTML. Interacción: Click en parámetros. Meta: Detallar/Gestionar.
+        - Economía: Tabla 7 (Costos) como gráfico de barras (Chart.js), enfocada en insumos y operación. Lista de recursos. Interacción: Click en recursos. Meta: Estimar/Informar.
+        - CONFIRMACIÓN: NO SVG graphics used. NO Mermaid JS used. Todas las visualizaciones serán con Chart.js (Canvas) o HTML/CSS/Tailwind. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Light Grey Background */
+            color: #212529; /* Near Black Text */
+        }
+        .nav-link {
+            @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-600 hover:text-white transition-colors;
+        }
+        .nav-link.active {
+            @apply bg-blue-500 text-white;
+        }
+        .section-title {
+            @apply text-3xl font-bold text-blue-700 mb-6 mt-4;
+        }
+        .subsection-title {
+            @apply text-2xl font-semibold text-blue-600 mb-4 mt-6;
+        }
+        .content-card {
+            @apply bg-white p-6 rounded-lg shadow-lg mb-6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        table {
+            @apply w-full text-sm text-left text-gray-600 rounded-lg overflow-hidden shadow;
+        }
+        thead {
+            @apply text-xs text-gray-700 uppercase bg-gray-200; /* Light Grey Table Header */
+        }
+        th, td {
+            @apply px-4 py-3;
+        }
+        tbody tr {
+            @apply bg-white border-b hover:bg-gray-50; /* Lighter hover for rows */
+        }
+        .tab-button {
+            @apply px-4 py-2 font-semibold text-gray-700 bg-gray-100 rounded-t-lg hover:bg-blue-100 hover:text-blue-700 focus:outline-none transition-colors;
+        }
+        .tab-button.active {
+            @apply bg-blue-500 text-white;
+        }
+        .tab-content {
+            @apply p-4 border border-gray-300 border-t-0 rounded-b-lg shadow-sm bg-white;
+        }
+        .icon-benefit {
+            @apply inline-block text-2xl mr-2 align-middle text-blue-500; /* Blue Icons */
+        }
+        .primary-button {
+            @apply bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors;
+        }
+        .cycle-diagram-box {
+            @apply p-4 border border-gray-300 rounded-lg;
+        }
+        .cycle-biofloc {
+            @apply bg-blue-50; /* Light blue for biofloc cycle */
+        }
+        .cycle-acuaponia {
+            @apply bg-indigo-50; /* Light indigo for aquaponics cycle */
+        }
+        .cycle-title {
+            @apply font-semibold text-xl mb-2;
+        }
+        .text-accent1 {
+            @apply text-blue-700;
+        }
+        .text-accent2 {
+            @apply text-indigo-700;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🐟🌿 Piscicultura Simbiótica en Cimitarra</h1>
+        </div>
+    </header>
+
+    <nav id="navbar" class="bg-gray-100 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16">
+                <div class="flex items-center">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#introduccion" class="nav-link">Introducción</a>
+                            <a href="#principios" class="nav-link">Principios</a>
+                            <a href="#tiposSistemas" class="nav-link">Tipos de Sistemas</a>
+                            <a href="#implementacion" class="nav-link">Implementación</a>
+                            <a href="#especies" class="nav-link">Especies</a>
+                            <a href="#manejoDiario" class="nav-link">Manejo Diario</a>
+                            <a href="#economia" class="nav-link">Economía</a>
+                            <a href="#recursos" class="nav-link">Recursos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-blue-500 inline-flex items-center justify-center p-2 rounded-md text-blue-100 hover:text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Abrir menú principal</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#introduccion" class="nav-link block">Introducción</a>
+                <a href="#principios" class="nav-link block">Principios</a>
+                <a href="#tiposSistemas" class="nav-link block">Tipos de Sistemas</a>
+                <a href="#implementacion" class="nav-link block">Implementación</a>
+                <a href="#especies" class="nav-link block">Especies</a>
+                <a href="#manejoDiario" class="nav-link block">Manejo Diario</a>
+                <a href="#economia" class="nav-link block">Economía</a>
+                <a href="#recursos" class="nav-link block">Recursos</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <section id="introduccion" class="pt-16 min-h-screen">
+            <h2 class="section-title">Introducción: Una Nueva Forma de Criar Peces</h2>
+            <div class="content-card">
+                <p class="mb-4">La piscicultura simbiótica es una manera inteligente y amigable con el medio ambiente para producir pescado. Se basa en el trabajo de microorganismos beneficiosos que ayudan a mantener sanos a los peces y limpia el agua. Esta técnica es más sostenible, permite criar más peces en menos espacio y puede ser más rentable.</p>
+                <h3 class="subsection-title">¿Por qué es interesante para Cimitarra?</h3>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li><span class="icon-benefit">💧</span><strong>Ahorro de agua:</strong> Sistemas como el biofloc casi no necesitan recambio de agua, ideal si el agua es escasa.</li>
+                    <li><span class="icon-benefit">💰</span><strong>Ahorro en alimento:</strong> Los microorganismos (bioflóculos) sirven de alimento extra y nutritivo, reduciendo la compra de concentrado (20-30% menos).</li>
+                    <li><span class="icon-benefit">🌍</span><strong>Cuidado del medio ambiente:</strong> Menos desechos y menor necesidad de harinas de pescado, protegiendo el entorno.</li>
+                    <li><span class="icon-benefit">🛡️</span><strong>Menos enfermedades:</strong> Un sistema bien manejado con microorganismos buenos protege a los peces.</li>
+                    <li><span class="icon-benefit">📈</span><strong>Mayor producción:</strong> Permite criar más peces en el mismo espacio (ej. tilapia: 80-100 peces/m³).</li>
+                </ul>
+                <p>Para un productor en Cimitarra, esto significa una piscicultura más rentable, eficiente en recursos y sostenible a largo plazo, especialmente si ya cuenta con estanques que puede adaptar.</p>
+            </div>
+        </section>
+
+        <section id="principios" class="pt-16 min-h-screen">
+            <h2 class="section-title">Entendiendo los Principios: ¿Cómo Funciona?</h2>
+            <div class="content-card">
+                <p class="mb-4">La piscicultura simbiótica no es magia, es ciencia. Se basa en el trabajo de millones de "ayudantes invisibles" (microorganismos como bacterias, levaduras y plancton) y los ciclos naturales que ellos manejan.</p>
+                
+                <div class="mb-6">
+                    <h3 class="subsection-title">El Papel de los Microorganismos</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li><strong>Bacterias probióticas:</strong> Como "yogures" para peces, mejoran la digestión y protegen contra enfermedades.</li>
+                        <li><strong>Formadores de bioflóculos:</strong> Agrupan desechos y materia orgánica en partículas nutritivas (bioflóculos) que los peces comen.</li>
+                        <li><strong>Levaduras y fermentos:</strong> Potencian la actividad microbiana, mejoran el agua y el alimento. Se preparan con melaza, agua y microorganismos seleccionados.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="subsection-title">El Ciclo de los Nutrientes: Desechos a Alimento</h3>
+                    <p class="mb-2">El principal problema en la piscicultura tradicional es el amonio de los desechos, tóxico para los peces. Los microorganismos lo reciclan:</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="cycle-diagram-box cycle-biofloc">
+                            <h4 class="cycle-title text-accent1">En el Sistema Biofloc (BFT)</h4>
+                            <ol class="list-decimal list-inside space-y-1">
+                                <li>Peces excretan amonio (Nitrógeno).</li>
+                                <li>Se añade fuente de Carbono (ej. melaza) para "alimentar" bacterias heterótrofas.</li>
+                                <li>Bacterias consumen amonio y carbono, multiplicándose y formando bioflóculos.</li>
+                                <li>Peces comen los bioflóculos. El agua se limpia (biorremediación).</li>
+                            </ol>
+                        </div>
+                        <div class="cycle-diagram-box cycle-acuaponia">
+                            <h4 class="cycle-title text-accent2">En el Sistema Acuapónico</h4>
+                            <ol class="list-decimal list-inside space-y-1">
+                                <li>Peces excretan amonio.</li>
+                                <li>Bacterias (*Nitrosomonas*) convierten amonio en nitrito (tóxico).</li>
+                                <li>Otras bacterias (*Nitrospira/Nitrobacter*) convierten nitrito en nitrato (menos tóxico, fertilizante).</li>
+                                <li>Plantas absorben nitratos, limpiando el agua.</li>
+                                <li>Agua limpia regresa a los peces.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <p class="mt-4">Estos microorganismos transforman un problema (desechos) en una solución (alimento o fertilizante), manteniendo a los peces sanos y el sistema eficiente.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tiposSistemas" class="pt-16 min-h-screen">
+            <h2 class="section-title">Tipos de Sistemas Simbióticos Prácticos</h2>
+            <div class="content-card">
+                <p class="mb-4">Existen varios sistemas simbióticos, pero nos enfocaremos en los más prácticos para su finca en Cimitarra: Biofloc y Acuaponía.</p>
+                <div id="tabs-tipos-sistemas" class="mb-4">
+                    <button class="tab-button active" onclick="openTab(event, 'bioflocTab', 'tabs-tipos-sistemas')">Biofloc (BFT)</button>
+                    <button class="tab-button" onclick="openTab(event, 'acuaponiaTab', 'tabs-tipos-sistemas')">Acuaponía</button>
+                    <button class="tab-button" onclick="openTab(event, 'amtisTab', 'tabs-tipos-sistemas')">AMTIS (Breve)</button>
+                </div>
+
+                <div id="bioflocTab" class="tab-content">
+                    <h3 class="subsection-title text-accent1">Sistema Biofloc (BFT): Cultivando Peces y "Copos de Alimento"</h3>
+                    <p class="mb-2">Los "bioflóculos" son agrupaciones de microorganismos y materia orgánica que flotan en el agua. Pilares:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-3">
+                        <li>Desarrollo del biofloc.</li>
+                        <li>Adición de fuente de carbono (melaza, harinas).</li>
+                        <li>Poca o ninguna renovación de agua.</li>
+                    </ul>
+                    <p class="mb-2 font-semibold">Funciones de los bioflóculos:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-3">
+                        <li><strong>Limpian el agua:</strong> Consumen amonio y compuestos tóxicos.</li>
+                        <li><strong>Sirven de alimento:</strong> Ricos en proteínas (35-50%), grasas, vitaminas y minerales.</li>
+                    </ul>
+                    <p class="mb-2 font-semibold">Ventajas principales:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Mejora calidad del agua.</li>
+                        <li>Alimento adicional y de calidad (reduce costos).</li>
+                        <li>Ahorro significativo de agua.</li>
+                        <li>Mejora salud de los peces (probióticos, inmunoestimulantes).</li>
+                        <li>Permite mayor densidad de siembra.</li>
+                    </ul>
+                </div>
+
+                <div id="acuaponiaTab" class="tab-content hidden">
+                    <h3 class="subsection-title text-accent2">Sistema Acuapónico: Peces que Ayudan a Crecer Plantas</h3>
+                    <p class="mb-2">Combina acuicultura (cría de peces) con hidroponía (cultivo de plantas sin tierra). Ciclo virtuoso:</p>
+                    <ol class="list-decimal list-inside space-y-1 mb-3">
+                        <li>Peces producen desechos (amonio).</li>
+                        <li>Agua con desechos va a camas de plantas.</li>
+                        <li>Bacterias en camas transforman amonio en nitratos.</li>
+                        <li>Plantas absorben nitratos y crecen.</li>
+                        <li>Plantas limpian el agua.</li>
+                        <li>Agua limpia regresa a los peces.</li>
+                    </ol>
+                    <p class="mb-2 font-semibold">Ventajas de combinar peces y plantas:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Producción doble (pescado y vegetales/frutas).</li>
+                        <li>Ahorro extremo de agua (hasta 1/6 de la agricultura tradicional).</li>
+                        <li>Fertilizante natural y gratuito (desechos de peces).</li>
+                        <li>Productos más sanos (sin pesticidas ni herbicidas).</li>
+                        <li>Implementable en espacios reducidos.</li>
+                    </ul>
+                     <p class="mt-2 text-sm">La <strong>acuaponía simbiótica</strong> incorpora fermentos para potenciar la actividad microbiana y la salud de peces y plantas.</p>
+                </div>
+
+                <div id="amtisTab" class="tab-content hidden">
+                    <h3 class="subsection-title">Acuicultura Multitrófica Integrada Simbiótica (AMTIS)</h3>
+                    <p class="mb-2">Lleva la simbiosis un nivel más arriba. Se cultivan diferentes especies acuáticas juntas, donde los desechos de una especie sirven de alimento para otra en el mismo sistema.</p>
+                    <p class="mb-2"><strong>Ejemplo:</strong> Tilapia con langostinos de agua dulce. Los langostinos se alimentan de heces de tilapia, alimento no consumido y bioflóculos.</p>
+                    <p>Es una tecnología muy prometedora para reducir desechos y aumentar eficiencia, pero su manejo es más complejo. Para empezar, biofloc o acuaponía son más directos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="implementacion" class="pt-16 min-h-screen">
+            <h2 class="section-title">Implementando el Sistema Simbiótico en sus Piscinas</h2>
+            <div class="content-card">
+                <p class="mb-4">Esta sección se enfoca en cómo adaptar sus piscinas existentes para un sistema simbiótico, aprovechando la infraestructura que ya posee.</p>
+                <h3 class="subsection-title">Consideraciones Iniciales para sus Piscinas en Cimitarra</h3>
+                <ul class="list-disc list-inside space-y-2 mb-3">
+                    <li><strong>Estado de las piscinas:</strong> Verifique la integridad de sus estanques. Si son de geomembrana, revise que no haya fugas. Si son de tierra, considere si son adecuados para sistemas más intensivos como biofloc (generalmente se prefieren tanques revestidos para mejor control).</li>
+                    <li><strong>Clima:</strong> Cálido (23-28°C promedio, humedad ~80%). Favorable para tilapia, cachama y microorganismos. Alta evaporación a considerar. Conozca el régimen de lluvias.</li>
+                    <li><strong>Fuentes de agua:</strong> Evalúe disponibilidad para el llenado inicial y reposición por evaporación. Biofloc reduce necesidad de recambio.</li>
+                </ul>
+
+                <div id="tabs-implementacion" class="mb-4">
+                    <button class="tab-button active" onclick="openTab(event, 'bioflocImplementacionTab', 'tabs-implementacion')">Implementando Biofloc</button>
+                    <button class="tab-button" onclick="openTab(event, 'acuaponiaImplementacionTab', 'tabs-implementacion')">Adaptando para Acuaponía</button>
+                </div>
+
+                <div id="bioflocImplementacionTab" class="tab-content">
+                    <h4 class="font-semibold text-xl mb-2 text-accent1">Implementando el Sistema Biofloc en sus Piscinas Existentes</h4>
+                    <p class="mb-2"><strong>1. Preparación de sus piscinas:</strong></p>
+                    <ul class="list-disc list-inside ml-4 mb-2">
+                        <li>Asegúrese de que las piscinas estén limpias y, si es necesario, desinfectadas antes de comenzar.</li>
+                        <li>Verifique que el drenaje funcione correctamente para futuras purgas de lodo, si son necesarias.</li>
+                    </ul>
+                    
+                    <p class="mb-2"><strong>2. Preparación del agua y Aireación (¡FUNDAMENTAL!):</strong></p>
+                    <ul class="list-disc list-inside ml-4 mb-2">
+                        <li>Llenar con agua limpia (sin cloro). pH inicial: 6.5-7.5.</li>
+                        <li>La aireación debe ser constante (24/7) y vigorosa. Esto es crucial para mantener los flóculos en suspensión y suministrar oxígeno a peces y microorganismos.</li>
+                        <li>Instale un sistema de aireación eficiente: sopladores (blowers) con mangueras difusoras o piedras difusoras distribuidas uniformemente en el fondo de la piscina.</li>
+                        <li>Considere un sistema de respaldo para la aireación en caso de fallas eléctricas.</li>
+                    </ul>
+                    <p class="mb-2"><strong>3. Creación y Maduración del Biofloc (8-15 días o más):</strong></p>
+                    <ul class="list-disc list-inside ml-4 mb-2">
+                        <li><strong>Fuente de carbono:</strong> Melaza (más común), harina de yuca, azúcar, etc. La adición de carbono es esencial para alimentar a las bacterias heterótrofas que consumirán el amonio.</li>
+                        <li><strong>Inóculo/probióticos (opcional pero recomendado):</strong> Para acelerar el proceso, puede añadir agua de un sistema biofloc maduro, probióticos comerciales, o incluso una pequeña cantidad de suelo de un estanque piscícola sano.</li>
+                        <li><strong>Proceso de Maduración:</strong> Con las piscinas llenas y la aireación funcionando, comience a añadir la fuente de carbono y el inóculo. Puede ser necesario un pequeño aporte inicial de nitrógeno (urea o cloruro de amonio, con precaución) para "arrancar" la población bacteriana si no hay peces aún.</li>
+                        <li><strong>Monitoreo Constante:</strong> Observe la formación de flóculos (use un cono Imhoff, buscando 10-20 ml/L de sólidos sedimentables). Mida diariamente pH, amoniaco (debería bajar con el tiempo) y oxígeno disuelto. El agua tomará un color marrón verdoso y olerá a tierra húmeda cuando el biofloc esté maduro.</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mt-4 mb-2 text-accent1">Insumos Básicos para Implementar Biofloc</h4>
+                    <table id="tablaInsumosBiofloc" class="min-w-full">
+                        <thead><tr><th>Insumo</th><th>Propósito</th><th>Observaciones</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                
+                <div id="acuaponiaImplementacionTab" class="tab-content hidden">
+                     <h4 class="font-semibold text-xl mb-2 text-accent2">Adaptando sus Piscinas para un Sistema Acuapónico</h4>
+                    <p class="mb-2">Si ya tiene sus piscinas para peces, el siguiente paso es integrar el componente hidropónico.</p>
+                    <p class="mb-2"><strong>Componentes a añadir:</strong></p>
+                    <ul class="list-disc list-inside ml-4 mb-2">
+                        <li><strong>Jardinera/cama para plantas:</strong> Se construirán separadas o adyacentes a sus piscinas. Deben estar a un nivel que permita el flujo de agua desde y hacia las piscinas. Pueden ser de plástico, madera impermeabilizada, etc.</li>
+                        <li><strong>Sustrato:</strong> Arlita, grava lavada, o fibra de coco para las camas de cultivo.</li>
+                        <li><strong>Bomba de agua:</strong> Para mover el agua desde sus piscinas de peces hacia las camas de plantas.</li>
+                        <li><strong>Tuberías PVC y conexiones:</strong> Para crear el circuito de agua entre las piscinas y las camas de cultivo.</li>
+                        <li><strong>Filtro mecánico (opcional pero recomendado):</strong> Para remover sólidos grandes del agua de los peces antes de que llegue a las plantas.</li>
+                    </ul>
+                    <p class="mb-2"><strong>Proceso de Integración:</strong></p>
+                    <ol class="list-decimal list-inside ml-4 mb-2">
+                        <li>Diseñe el flujo del agua: cómo saldrá de la piscina, pasará por el filtro (si lo usa), llegará a las camas de plantas y regresará a la piscina.</li>
+                        <li>Instale la bomba en su piscina de peces, conectada a las tuberías que llevarán el agua a las camas de cultivo.</li>
+                        <li>Construya y llene las camas de cultivo con el sustrato.</li>
+                        <li>Asegure un sistema de desagüe eficiente en las camas de cultivo para que el agua regrese a la piscina de peces, idealmente por gravedad y con buena oxigenación (ej. cayendo en cascada).</li>
+                        <li>Una vez montado, haga circular el agua por varios días o semanas (proceso de "ciclado") para permitir que se establezcan las bacterias nitrificantes en el sustrato antes de añadir plantas y peces (o si ya tiene peces, antes de añadir las plantas).</li>
+                    </ol>
+                    <p>Considere la iluminación adecuada para las plantas seleccionadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="especies" class="pt-16 min-h-screen">
+            <h2 class="section-title">Eligiendo sus Compañeros de Cultivo</h2>
+            <div class="content-card">
+                <p class="mb-4">La elección correcta de peces y plantas es fundamental para el éxito en Cimitarra.</p>
+                
+                <h3 class="subsection-title">Peces Recomendados para Clima Cálido</h3>
+                <p class="mb-3">Buscar especies robustas, de crecimiento rápido y con mercado.</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="chartPecesRecomendados"></canvas>
+                </div>
+                <div class="overflow-x-auto mt-4">
+                    <table id="tablaPeces" class="min-w-full">
+                        <thead><tr><th>Especie</th><th>Temp. Óptima (°C)</th><th>pH Óptimo</th><th>O2 Mín. (ppm)</th><th>Rusticidad</th><th>Pot. Biofloc</th><th>Pot. Acuaponía</th><th>Cosecha (meses)</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                 <p class="text-sm mt-2"><strong>Nota:</strong> La Tilapia es la más recomendada para empezar. La Cachama es una buena alternativa nativa. El Bocachico tiene atractivo local pero requiere más experiencia en biofloc.</p>
+
+
+                <h3 class="subsection-title mt-8">Plantas Ideales para Acuaponía en Clima Cálido</h3>
+                <p class="mb-3">Empezar con hortalizas de hoja y aromáticas (ciclos cortos, menos exigentes).</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="chartPlantasRecomendadas"></canvas>
+                </div>
+                 <div class="overflow-x-auto mt-4">
+                    <table id="tablaPlantas" class="min-w-full">
+                        <thead><tr><th>Tipo</th><th>Ejemplos</th><th>pH Óptimo</th><th>Temp. Óptima (°C)</th><th>Luz</th><th>Cosecha (semanas)</th><th>Dificultad</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p class="text-sm mt-2"><strong>Nota:</strong> Lechugas y albahaca son excelentes para aprender. Luego, puede intentar con plantas de fruto.</p>
+            </div>
+        </section>
+
+        <section id="manejoDiario" class="pt-16 min-h-screen">
+            <h2 class="section-title">El Día a Día: Manejo y Cuidados Esenciales</h2>
+            <div class="content-card">
+                <p class="mb-4">El manejo diario es clave, especialmente en sistemas cerrados. Implica estar atento a la calidad del agua y a los microorganismos.</p>
+                
+                <h3 class="subsection-title">Calidad del Agua: La Clave</h3>
+                <p class="mb-2">Aprender a "leer" y manejar el agua es fundamental. Parámetros importantes:</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="chartCalidadAgua"></canvas>
+                </div>
+                <div class="overflow-x-auto mt-4">
+                    <table id="tablaCalidadAgua" class="min-w-full">
+                        <thead><tr><th>Parámetro</th><th>Rango Óptimo</th><th>Medición Sencilla</th><th>Problemas si Fuera de Rango</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p class="mt-4 mb-2"><strong>Manejo de la relación Carbono:Nitrógeno (C:N) en biofloc:</strong></p>
+                <ul class="list-disc list-inside ml-4 mb-2">
+                    <li>Esencial para que bacterias heterótrofas consuman amonio.</li>
+                    <li>Relación ideal: 15:1 a 20:1 (Carbono:Nitrógeno).</li>
+                    <li>Alimento concentrado tiene C:N bajo (ej. 8:1). Se necesita añadir carbono.</li>
+                    <li><strong>Fuente de carbono:</strong> Melaza (más común). 1g de amonio necesita ~12.5g de melaza (varía). Otras: azúcar, harinas.</li>
+                </ul>
+
+                <h3 class="subsection-title mt-6">Alimentación de los Peces</h3>
+                <ul class="list-disc list-inside ml-4 mb-2">
+                    <li>Bioflóculos complementan dieta (20-30% ahorro en concentrado).</li>
+                    <li>Usar concentrado de buena calidad, 1-2 veces/día.</li>
+                    <li><strong>¡Evitar sobrealimentación!</strong> Genera amonio, consume oxígeno. Retirar alimento no consumido.</li>
+                    <li>Alimentos fermentados pueden mejorar asimilación.</li>
+                </ul>
+
+                <h3 class="subsection-title mt-6">Limpieza y Mantenimiento</h3>
+                <ul class="list-disc list-inside ml-4 mb-2">
+                    <li><strong>Biofloc:</strong> Purgar exceso de sólidos/lodo del fondo periódicamente.</li>
+                    <li><strong>Acuaponía:</strong> Limpiar filtros mecánicos, revisar tuberías, cosechar plantas.</li>
+                    <li>Mantener alrededores limpios.</li>
+                </ul>
+
+                <h3 class="subsection-title mt-6">Bioseguridad</h3>
+                <ul class="list-disc list-inside ml-4 mb-2">
+                    <li>Controlar acceso a tanques.</li>
+                    <li>Limpiar y desinfectar equipos.</li>
+                    <li>Alevinos de proveedores confiables, cuarentena si es posible.</li>
+                    <li>Retirar peces muertos y enterrarlos con cal.</li>
+                    <li>Llevar registros básicos.</li>
+                </ul>
+                 <h4 class="font-semibold text-lg mt-4 mb-2 text-accent1">Fuentes de Carbono Comunes para Biofloc</h4>
+                <div class="overflow-x-auto mt-2">
+                    <table id="tablaFuentesCarbono" class="min-w-full">
+                        <thead><tr><th>Fuente</th><th>% Carbono (aprox.)</th><th>Consideraciones</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="economia" class="pt-16 min-h-screen">
+            <h2 class="section-title">Consideraciones Económicas</h2>
+            <div class="content-card">
+                <p class="mb-4">Iniciar un proyecto requiere pensar en costos de operación y mercado.</p>
+                <h3 class="subsection-title">Estimación de Costos de Operación e Insumos</h3>
+                <p class="mb-3">Los precios son estimados y varían. Investigar localmente. Estos costos no incluyen la construcción inicial de piscinas, ya que se asume que existen.</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="chartCostosIniciales"></canvas>
+                </div>
+                 <div class="overflow-x-auto mt-4">
+                    <table id="tablaCostos" class="min-w-full">
+                        <thead><tr><th>Componente/Insumo</th><th>Cantidad Estimada</th><th>Rango Precio (COP)</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p class="mt-3 text-sm"><strong>Nota:</strong> La mayor inversión inicial, además de los alevinos y el alimento, será en el sistema de aireación para biofloc o la bomba y componentes para acuaponía. El tiempo para aprender y manejar el sistema también es una inversión clave.</p>
+
+                <h3 class="subsection-title mt-6">Mercado Local en Cimitarra y Santander</h3>
+                <ul class="list-disc list-inside ml-4 mb-2">
+                    <li>Buen consumo de pescado en Colombia (Tilapia popular).</li>
+                    <li>Cachama con buena demanda (450g en ~4 meses).</li>
+                    <li><strong>Opciones de venta:</strong> Directa en mercados, restaurantes, tiendas, intermediarios.</li>
+                    <li>Investigar mercado local: preferencias, tamaños, precios.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="recursos" class="pt-16 min-h-screen">
+            <h2 class="section-title">Recursos y Apoyo Adicional</h2>
+            <div class="content-card">
+                <p class="mb-4">No está solo. Varias instituciones y recursos pueden ayudarle:</p>
+                <ul class="list-disc list-inside space-y-3">
+                    <li><strong>AUNAP (Autoridad Nacional de Acuicultura y Pesca):</strong> Guías, investigación, fomento.</li>
+                    <li><strong>SENA (Servicio Nacional de Aprendizaje):</strong> Cursos y capacitación técnica.</li>
+                    <li><strong>ICA (Instituto Colombiano Agropecuario):</strong> Normativa de bioseguridad (Res. 20186).</li>
+                    <li><strong>FAO (Organización de las Naciones Unidas para la Alimentación y la Agricultura):</strong> Manuales y guías gratuitas online.</li>
+                    <li><strong>Universidades y Centros de Investigación:</strong> Información, posible asesoría.</li>
+                    <li><strong>UMATA (Unidad Municipal de Asistencia Técnica Agropecuaria) de Cimitarra.</strong></li>
+                    <li><strong>Otros piscicultores locales.</strong></li>
+                </ul>
+                <p class="mt-6 font-semibold text-blue-700">La información y la capacitación son inversiones clave. ¡Busque activamente estos recursos!</p>
+            </div>
+             <div class="content-card mt-8">
+                <h3 class="subsection-title">Primeros Pasos y Recomendaciones Finales</h3>
+                <ol class="list-decimal list-inside space-y-2 mb-4">
+                    <li>Infórmese bien y siga aprendiendo.</li>
+                    <li>Planifique la adaptación de su sistema con cuidado.</li>
+                    <li>Evalúe sus recursos honestamente.</li>
+                    <li><strong>Empiece adaptando una o dos piscinas:</strong> Es la estrategia más inteligente para aprender la nueva técnica.</li>
+                    <li>Prepare el agua y madure el sistema con paciencia.</li>
+                    <li>Consiga alevinos de buena calidad.</li>
+                    <li>Maneje y monitoree con dedicación.</li>
+                    <li>Lleve registros sencillos.</li>
+                </ol>
+                <p class="text-lg font-semibold text-center text-blue-800 mt-6">
+                    ¡Mucho éxito en su proyecto de piscicultura simbiótica en Cimitarra! El campo colombiano tiene un gran potencial, y productores emprendedores como usted son la clave.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 Guía Interactiva de Piscicultura Simbiótica. Inspirado en el informe para productores de Cimitarra.</p>
+    </footer>
+
+    <script>
+        const chartColors = {
+            primaryBlue: 'rgba(0, 123, 255, 0.7)',
+            mediumGrey: 'rgba(108, 117, 125, 0.7)',
+            amberGold: 'rgba(255, 193, 7, 0.7)',
+            infoTeal: 'rgba(23, 162, 184, 0.7)',
+            dangerRed: 'rgba(220, 53, 69, 0.7)',
+            vibrantOrange: 'rgba(253, 126, 20, 0.7)'
+        };
+
+        const dataPeces = [
+            { especie: "Tilapia", temp: [22, 30], ph: [5.0, 9.0], o2: 4, rusticidad: "Muy Alta", biofloc: "Excelente", acuaponia: "Muy Bueno", cosecha: "6-8" },
+            { especie: "Cachama", temp: [24, 29], ph: [6.5, 8.5], o2: 4, rusticidad: "Alta", biofloc: "Bueno", acuaponia: "Bueno", cosecha: "8-10" },
+            { especie: "Bocachico", temp: [24, 29], ph: [6.5, 8.5], o2: 4, rusticidad: "Media", biofloc: "Prometedor", acuaponia: "Menos común", cosecha: "10-12" }
+        ];
+
+        const dataPlantas = [
+            { tipo: "Hoja", ejemplos: "Lechuga, Espinaca, Acelga", ph: [6.0, 7.0], temp: [15, 25], luz: "Moderada-Alta", cosecha: "4-6", dificultad: "Bajo" },
+            { tipo: "Aromática", ejemplos: "Albahaca, Menta, Cilantro", ph: [5.5, 6.5], temp: [20, 25], luz: "Moderada-Alta", cosecha: "5-8", dificultad: "Bajo-Medio" },
+            { tipo: "Fruto", ejemplos: "Tomate, Pepino, Pimentón", ph: [5.5, 6.5], temp: [15, 26], luz: "Alta", cosecha: "8-12+", dificultad: "Medio-Alto" },
+            { tipo: "Otras", ejemplos: "Brócoli, Cebolla", ph: [6.0, 7.0], temp: [10, 20], luz: "Moderada-Alta", cosecha: "Variable", dificultad: "Medio" }
+        ];
+        
+        const dataCalidadAgua = [
+            { parametro: "Oxígeno Disuelto (OD)", rango: "> 4-5 mg/L", medicion: "Oxímetro, kits colorimétricos", problemas: "Estrés, muerte de peces y microorganismos." },
+            { parametro: "pH", rango: "Biofloc: 6.0-7.5, Acuaponía: 6.0-7.0", medicion: "pHmetro, tiras/kits", problemas: "Estrés, afecta bacterias, toxicidad amonio." },
+            { parametro: "Temperatura", rango: "Tilapia: 22-30°C, Cachama: 24-29°C", medicion: "Termómetro", problemas: "Crecimiento lento, estrés." },
+            { parametro: "Amonio Total (NH3/NH4+)", rango: "< 1 mg/L (<0.5 NH3)", medicion: "Kits colorimétricos", problemas: "Tóxico, daño branquias, muerte." },
+            { parametro: "Nitritos (NO2-)", rango: "< 0.5 mg/L", medicion: "Kits colorimétricos", problemas: "Muy tóxico, impide transporte O2." },
+            { parametro: "Alcalinidad", rango: "Biofloc: 100-150 mg/L, General: >60 mg/L", medicion: "Kits titulación", problemas: "Fluctuaciones pH, afecta nitrificación." },
+            { parametro: "Sólidos Sedimentables (Biofloc)", rango: "10-20 ml/L (cono Imhoff)", medicion: "Cono Imhoff", problemas: "Exceso: obstruye branquias, consume O2. Poco: poca comida." }
+        ];
+
+        const dataInsumosBiofloc = [
+            { insumo: "Melaza (o similar)", proposito: "Alimento bacterias (C:N)", observaciones: "Más común y económica. Otras: harina yuca, azúcar." },
+            { insumo: "Sal (sin yodo)", proposito: "Manejo estrés peces, control nitritos", observaciones: "Sal marina o para ganado." },
+            { insumo: "Bicarbonato Sodio / Cal Agrícola", proposito: "Aumentar y estabilizar alcalinidad/pH", observaciones: "Cal sube alcalinidad y dureza. Bicarbonato sube alcalinidad." },
+            { insumo: "Probiótico (opcional)", proposito: "Acelerar maduración biofloc, salud sistema", observaciones: "Comercial o agua de biofloc sano." }
+        ];
+
+        const dataFuentesCarbono = [
+            { fuente: "Melaza de caña", carbono_aprox: "40-50%", consideraciones: "Muy usada, económica. Puede colorear agua. Disolver bien." },
+            { fuente: "Azúcar (Sacarosa)", carbono_aprox: "~42%", consideraciones: "Se disuelve fácil. Más costosa que melaza." },
+            { fuente: "Harina de Yuca", carbono_aprox: "~40% (seca)", consideraciones: "Disponible. Moler fino. Puede enturbiar." },
+            { fuente: "Salvado de Arroz/Trigo", carbono_aprox: "~40-45%", consideraciones: "Aporta fibra. Puede flotar." }
+        ];
+        
+        const dataCostos = [
+            { componente: "Bomba aire/soplador + accesorios", cantidad: "1 kit", rango_precio: "150,000 - 700,000 (varía mucho por capacidad)" },
+            { componente: "Alevinos (Tilapia/Cachama)", cantidad: "Por cada 1000L: 50-100 uds", rango_precio: "50,000 - 150,000 (lote para 1000L)" },
+            { componente: "Alimento concentrado inicial", cantidad: "1 bulto", rango_precio: "70,000 - 150,000" },
+            { componente: "Melaza", cantidad: "1 bulto", rango_precio: "30,000 - 80,000" },
+            { componente: "Sal (sin yodo)", cantidad: "1 bulto", rango_precio: "20,000 - 50,000" },
+            { componente: "Bicarbonato/Cal", cantidad: "5-10 kg", rango_precio: "10,000 - 30,000" },
+            { componente: "Kit básico análisis agua", cantidad: "1 kit", rango_precio: "150,000 - 300,000" },
+            { componente: "TOTAL INSUMOS Y EQUIPAMIENTO BÁSICO (APROX)", cantidad: "", rango_precio: "500,000 - 1,500,000 (sin contar piscinas)" },
+            { componente: "Adicional Acuaponía (Bomba agua, sustrato, tuberías)", cantidad: "", rango_precio: "100,000 - 400,000" }
+        ];
+
+        function populateTable(tableId, data, columns) {
+            const tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            data.forEach(rowData => {
+                const row = tableBody.insertRow();
+                columns.forEach(col => {
+                    const cell = row.insertCell();
+                    let cellValue = rowData[col.key];
+                    if (Array.isArray(cellValue) && (col.key.includes('temp') || col.key.includes('ph'))) {
+                        cell.textContent = `${cellValue[0]}-${cellValue[1]}`;
+                    } else {
+                        cell.textContent = cellValue;
+                    }
+                });
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTable('tablaPeces', dataPeces, [
+                { key: 'especie' }, { key: 'temp' }, { key: 'ph' }, { key: 'o2' }, 
+                { key: 'rusticidad' }, { key: 'biofloc' }, { key: 'acuaponia' }, { key: 'cosecha' }
+            ]);
+            populateTable('tablaPlantas', dataPlantas, [
+                { key: 'tipo' }, { key: 'ejemplos' }, { key: 'ph' }, { key: 'temp' }, 
+                { key: 'luz' }, { key: 'cosecha' }, { key: 'dificultad' }
+            ]);
+            populateTable('tablaCalidadAgua', dataCalidadAgua, [
+                { key: 'parametro' }, { key: 'rango' }, { key: 'medicion' }, { key: 'problemas' }
+            ]);
+            populateTable('tablaInsumosBiofloc', dataInsumosBiofloc, [
+                { key: 'insumo' }, { key: 'proposito' }, { key: 'observaciones' }
+            ]);
+            populateTable('tablaFuentesCarbono', dataFuentesCarbono, [
+                { key: 'fuente' }, { key: 'carbono_aprox' }, { key: 'consideraciones' }
+            ]);
+            populateTable('tablaCostos', dataCostos, [
+                { key: 'componente' }, { key: 'cantidad' }, { key: 'rango_precio' }
+            ]);
+            
+            const ctxPeces = document.getElementById('chartPecesRecomendados')?.getContext('2d');
+            if (ctxPeces) {
+                new Chart(ctxPeces, {
+                    type: 'bar',
+                    data: {
+                        labels: dataPeces.map(p => p.especie),
+                        datasets: [
+                            {
+                                label: 'Temp. Óptima Max (°C)',
+                                data: dataPeces.map(p => p.temp[1]),
+                                backgroundColor: chartColors.primaryBlue,
+                                borderColor: chartColors.primaryBlue.replace('0.7', '1'),
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Tiempo Cosecha (meses max)',
+                                data: dataPeces.map(p => parseInt(p.cosecha.split('-')[1] || p.cosecha)),
+                                backgroundColor: chartColors.infoTeal,
+                                borderColor: chartColors.infoTeal.replace('0.7', '1'),
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', }, title: { display: true, text: 'Comparativa Peces Recomendados' } } }
+                });
+            }
+
+            const ctxPlantas = document.getElementById('chartPlantasRecomendadas')?.getContext('2d');
+            if (ctxPlantas) {
+                new Chart(ctxPlantas, {
+                    type: 'bar',
+                    data: {
+                        labels: dataPlantas.map(p => p.tipo + " (" + p.ejemplos.substring(0,15) + "...)"),
+                        datasets: [
+                             {
+                                label: 'Temp. Óptima Max (°C)',
+                                data: dataPlantas.map(p => p.temp[1]),
+                                backgroundColor: chartColors.amberGold,
+                                borderColor: chartColors.amberGold.replace('0.7', '1'),
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Cosecha (semanas max)',
+                                data: dataPlantas.map(p => parseInt(p.cosecha.split('-')[1] || p.cosecha)),
+                                backgroundColor: chartColors.vibrantOrange,
+                                borderColor: chartColors.vibrantOrange.replace('0.7', '1'),
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { position: 'top', }, title: { display: true, text: 'Comparativa Plantas para Acuaponía' } } }
+                });
+            }
+            
+            const ctxCalidadAgua = document.getElementById('chartCalidadAgua')?.getContext('2d');
+            if(ctxCalidadAgua) {
+                new Chart(ctxCalidadAgua, {
+                    type: 'bar',
+                    data: {
+                        labels: ['pH Biofloc', 'pH Acuaponía', 'Alcalinidad Biofloc (mg/L)'],
+                        datasets: [{
+                            label: 'Rango Óptimo',
+                            data: [ [6.0, 7.5], [6.0, 7.0], [100, 150]],
+                            backgroundColor: chartColors.primaryBlue,
+                            borderColor: chartColors.primaryBlue.replace('0.7', '1'),
+                            borderWidth: 1,
+                            barPercentage: 0.5,
+                            borderSkipped: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        plugins: { title: { display: true, text: 'Rangos Óptimos de Parámetros Clave' } },
+                        scales: { x: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            const ctxCostos = document.getElementById('chartCostosIniciales')?.getContext('2d');
+            if (ctxCostos) {
+                new Chart(ctxCostos, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Insumos y Equipamiento Biofloc (Aprox)', 'Adaptación Acuaponía Adicional (Aprox)'],
+                        datasets: [{
+                            label: 'Costo Mínimo (COP)',
+                            data: [500000, 100000],
+                            backgroundColor: chartColors.mediumGrey,
+                        }, {
+                            label: 'Costo Máximo (COP)',
+                            data: [1500000, 400000],
+                            backgroundColor: chartColors.infoTeal,
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top' }, title: { display: true, text: 'Estimación Costos Implementación (COP)' } },
+                        scales: { y: { beginAtZero: true, ticks: { callback: value => `${value/1000}K` } } }
+                    }
+                });
+            }
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenuButton && mobileMenu){
+                mobileMenuButton.addEventListener('click', () => {
+                    const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuButton.setAttribute('aria-expanded', !expanded);
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
+                });
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement){
+                        const navbarHeight = document.getElementById('navbar').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+                        
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: "smooth"
+                        });
+
+                        document.querySelectorAll('#navbar .hidden.md\\:block .nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                             document.querySelectorAll('#mobile-menu .nav-link').forEach(link => {
+                                link.classList.remove('active');
+                                if(link.getAttribute('href') === targetId) link.classList.add('active');
+                            });
+                            mobileMenuButton.click();
+                        }
+                    }
+                });
+            });
+            
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#navbar .hidden.md\\:block .nav-link');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu .nav-link');
+
+            window.onscroll = () => {
+                let current = '';
+                const navbarHeight = document.getElementById('navbar').offsetHeight;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - navbarHeight - 10; 
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+                 mobileNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+        });
+
+        function openTab(event, tabName, tabContainerId) {
+            let i, tabcontent, tablinks;
+            const container = document.getElementById(tabContainerId);
+            tabcontent = container.parentElement.querySelectorAll(".tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.add("hidden");
+            }
+            tablinks = container.querySelectorAll(".tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.remove("hidden");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
