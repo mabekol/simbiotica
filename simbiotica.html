@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piscicultura Simbiótica: Guía Práctica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-section h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 600; /* semibold */
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #1e3a8a; /* text-blue-800 */
+            border-bottom: 2px solid #3b82f6; /* border-blue-500 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        .content-section h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+            color: #1e40af; /* text-blue-700 */
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.6;
+            color: #374151; /* text-gray-700 */
+        }
+        .content-section ul {
+            list-style-type: disc;
+            margin-left: 1.5rem; /* ml-6 */
+        }
+        .content-section ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem; /* ml-6 */
+        }
+        .content-section strong {
+            color: #111827; /* text-gray-900 */
+        }
+        .content-section table {
+            width: 100%;
+            margin-bottom: 1.5rem; /* mb-6 */
+            border-collapse: collapse;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content-section th, .content-section td {
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            padding: 0.75rem; /* p-3 */
+            text-align: left;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .content-section th {
+            background-color: #f3f4f6; /* bg-gray-100 */
+            font-weight: 600; /* semibold */
+            color: #1e3a8a; /* text-blue-800 */
+        }
+        .content-section td {
+            background-color: #ffffff; /* bg-white */
+        }
+        .navbar-item.active {
+            background-color: #1e3a8a; /* bg-blue-800 */
+            color: white;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <h1 class="text-2xl font-bold">Piscicultura Simbiótica</h1>
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+            <nav id="menu" class="w-full md:w-auto hidden md:block mt-2 md:mt-0">
+                <ul class="flex flex-col md:flex-row md:space-x-2">
+                    <li><a href="#introduccion" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Introducción</a></li>
+                    <li><a href="#principios" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Principios</a></li>
+                    <li><a href="#tipos-sistemas" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Tipos de Sistemas</a></li>
+                    <li><a href="#implementacion" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Implementación</a></li>
+                    <li><a href="#especies" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Especies</a></li>
+                    <li><a href="#manejo-diario" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Manejo Diario</a></li>
+                    <li><a href="#economia" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Economía</a></li>
+                    <li><a href="#final" class="navbar-item block py-2 px-3 hover:bg-blue-700 rounded">Recomendaciones</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-xl content-section">
+
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-blue-700 mb-2">Piscicultura Simbiótica: Una Guía Práctica</h1>
+                <p class="text-lg text-gray-600">Para el Productor de Cimitarra, Santander</p>
+            </div>
+
+            <section id="introduccion">
+                <h2>Sección 1: Introducción: Una Nueva Forma de Criar Peces en Armonía con la Naturaleza</h2>
+                <p>La piscicultura, o cría de peces, está cambiando. Hoy en día, existen formas más inteligentes y amigables con el medio ambiente para producir pescado de buena calidad, y una de las más prometedoras es la piscicultura simbiótica.</p>
+                <h3>¿Qué es la piscicultura simbiótica?</h3>
+                <p>Imagine un sistema de cría de peces donde pequeños seres vivos, tan pequeños que no los vemos a simple vista, trabajan para usted. Estos son los microorganismos, como bacterias y levaduras buenas, que juegan un papel fundamental. La acuicultura simbiótica se basa precisamente en utilizar estos microorganismos que ayudan de forma directa o indirecta a que sus peces estén más sanos y que el agua donde viven se mantenga limpia y de buena calidad. En lugar de ver el agua solo como el lugar donde nadan los peces, en la piscicultura simbiótica, el agua se convierte en un caldo de cultivo vivo y beneficioso.</p>
+                <p>Esta manera de criar animales acuáticos está ganando popularidad porque ofrece muchas ventajas: es más sostenible, permite tener más peces en espacios más reducidos, puede generar mayores beneficios económicos y, muy importante, respeta más el medio ambiente. Es como si hubiéramos entrado en una nueva era para la acuicultura, la era de la tecnología simbiótica.</p>
+                <h3>¿Por qué es interesante para usted como productor en Cimitarra?</h3>
+                <p>Para un productor en una zona como Cimitarra, Santander, este tipo de piscicultura ofrece soluciones prácticas a desafíos comunes. Consideremos los beneficios más importantes:</p>
+                <ul>
+                    <li><strong>Ahorro de agua:</strong> Una de las grandes ventajas es que muchos de estos sistemas, como el biofloc, casi no necesitan que se cambie el agua. El agua se mantiene limpia gracias al trabajo de los microorganismos. Esto es un alivio enorme si el agua en su finca es escasa, si tiene costos para bombearla o si simplemente quiere usar este recurso tan valioso de una forma más eficiente.</li>
+                    <li><strong>Ahorro en alimento:</strong> El alimento concentrado suele ser el gasto más grande en la cría de peces tradicional, representando a veces hasta el 60% de todos los costos. En la piscicultura simbiótica, los mismos microorganismos que limpian el agua se agrupan y forman pequeñas partículas llamadas bioflóculos, que sirven de alimento extra y muy nutritivo para los peces. Se calcula que los peces pueden obtener entre un 20% y un 30% de su alimentación de estos bioflóculos. Esto significa que usted podría necesitar comprar menos concentrado, aliviando su bolsillo.</li>
+                    <li><strong>Cuidado del medio ambiente:</strong> Al no tener que botar grandes cantidades de agua cargada de desechos y al reducir la necesidad de alimentos que a veces se fabrican con harina de pescado (proveniente de la pesca en el mar), se está cuidando el entorno natural. Este sistema promueve una producción más limpia, sin usar harinas de pescado en la alimentación y con un recambio de agua que puede ser cero o muy bajo. Esto no solo es bueno para la naturaleza, sino que también le evita problemas relacionados con el manejo de aguas residuales, simplificando su trabajo.</li>
+                    <li><strong>Menos enfermedades:</strong> Un sistema simbiótico bien manejado, con una comunidad saludable de microorganismos buenos, puede ayudar a que sus peces se enfermen menos. Algunos de estos microorganismos compiten con las bacterias malas o producen sustancias que las controlan.</li>
+                    <li><strong>Mayor producción en menos espacio:</strong> Estas tecnologías permiten criar más peces en el mismo estanque o tanque comparado con los métodos tradicionales. Por ejemplo, con tilapia, en un sistema simbiótico bien llevado, se podrían tener entre 80 e incluso 100 peces por cada metro cúbico de agua. Esto significa que puede producir mucha más carne de pescado en una hectárea de lo que se lograría con la ganadería tradicional, por ejemplo.</li>
+                </ul>
+                <p>Para un productor en Cimitarra, estas ventajas no son solo palabras bonitas. Significan la posibilidad de tener una actividad piscícola más rentable, más fácil de manejar en cuanto al uso de recursos como el agua, y más sostenible a largo plazo. Es una oportunidad para producir alimentos de manera eficiente y responsable.</p>
+            </section>
+
+            <section id="principios">
+                <h2>Sección 2: Entendiendo los Principios: ¿Cómo Funciona la Magia?</h2>
+                <p>Para entender cómo la piscicultura simbiótica puede ser tan beneficiosa, es importante conocer a los protagonistas de esta historia: los microorganismos y los ciclos naturales que ellos manejan. No es magia, es ciencia trabajando a su favor.</p>
+                <h3>El papel de los ayudantes invisibles: los microorganismos</h3>
+                <p>En el corazón de la piscicultura simbiótica se encuentra una comunidad diversa de "trabajadores invisibles". Estos son millones de microorganismos, principalmente bacterias y levaduras, pero también diferentes tipos de plancton, que son organismos acuáticos muy pequeños. El plancton se divide en fitoplancton (pequeñas algas y cianobacterias) y zooplancton (animalitos microscópicos como rotíferos, copépodos y cladóceros).</p>
+                <p>Estos microorganismos no están ahí por casualidad; se cultivan intencionalmente porque cada grupo tiene una función especial:</p>
+                <ul>
+                    <li><strong>Bacterias probióticas:</strong> Son como los "yogures" para los peces. Se añaden al sistema y viven en el tracto digestivo de los peces, ayudándoles a digerir mejor el alimento y protegiéndolos contra bacterias que causan enfermedades. Esto mejora la salud general y la supervivencia de los animales.</li>
+                    <li><strong>Formadores de bioflóculos:</strong> Ciertas bacterias, junto con algas y otros microorganismos, toman los desechos de los peces y la materia orgánica del agua y los agrupan, formando pequeñas partículas visibles llamadas "bioflóculos". Estos flóculos no solo limpian el agua, sino que son una fuente de alimento muy nutritiva para los peces, rica en proteínas y otros compuestos esenciales.</li>
+                    <li><strong>Levaduras y otros microorganismos en fermentos:</strong> Para potenciar aún más la actividad de estos ayudantes, se utilizan "fermentos". Estos son preparados que se hacen usualmente con una fuente de energía como la melaza, agua y una mezcla de microorganismos seleccionados, como levaduras (del género Saccharomyces, por ejemplo) y bacterias beneficiosas (como Bacillus y Lactobacillus). Estos fermentos se pueden añadir tanto al agua del estanque como directamente sobre el alimento de los peces. Durante el proceso de fermentación, se liberan ácidos orgánicos (como el ácido acético o el butírico) que pueden ayudar a mantener un pH adecuado en el agua y también actúan contra ciertos agentes patógenos, tanto para los peces como, en el caso de la acuaponía, para las plantas.</li>
+                </ul>
+                <p>En esencia, usted no solo está criando peces, sino que también está "cultivando" una comunidad de microorganismos que trabajan en equipo para crear un ambiente saludable y productivo. Este manejo del ecosistema dentro del estanque es lo que diferencia a la piscicultura simbiótica.</p>
+                <h3>El ciclo de los nutrientes: cómo los desechos se convierten en alimento y agua limpia</h3>
+                <p>Uno de los mayores problemas en la piscicultura tradicional es la acumulación de desechos de los peces, principalmente el amonio (que se encuentra en la orina y las heces). El amonio, en altas concentraciones, es tóxico y puede matar a los peces. Aquí es donde los microorganismos de la piscicultura simbiótica muestran su gran valor, reciclando estos desechos y transformándolos en algo útil.</p>
+                <p>Veamos cómo ocurre esto en los principales sistemas simbióticos:</p>
+                <ul>
+                    <li><strong>En el sistema Biofloc (BFT):</strong> Los peces excretan amonio. Para que las bacterias beneficiosas (especialmente las heterótrofas) puedan consumir este amonio y crecer, necesitan una fuente de carbono (energía). Esta fuente de carbono se la proporcionamos nosotros, usualmente en forma de melaza, harina de yuca, u otro carbohidrato. Al tener nitrógeno (del amonio) y carbono, estas bacterias se multiplican rápidamente, consumiendo el amonio tóxico y convirtiéndolo en proteína bacteriana, es decir, en sus propios cuerpos. Estas bacterias, junto con otros microorganismos y partículas, forman los bioflóculos que los peces luego comen. Este proceso se llama "biorremediación", porque los propios microorganismos remedian o limpian el agua. Es fundamental entender que el carbono que se añade no es para alimentar directamente a los peces, sino para "alimentar" a las bacterias que limpian el agua y que, a su vez, se convierten en alimento. Sin un buen balance entre el carbono y el nitrógeno, el sistema no funciona bien.</li>
+                    <li><strong>En el sistema Acuapónico:</strong> Aquí la transformación de los desechos de los peces ocurre en dos pasos principales, gracias a diferentes tipos de bacterias nitrificantes:
+                        <ol>
+                            <li>Primero, unas bacterias (como las del género Nitrosomonas) convierten el amonio (NH<sub>3</sub>/NH<sub>4</sub><sup>+</sup>) en nitrito (NO<sub>2</sub><sup>-</sup>). El nitrito también es tóxico para los peces.</li>
+                            <li>Luego, otras bacterias (como las del género Nitrospira o Nitrobacter) convierten el nitrito (NO<sub>2</sub><sup>-</sup>) en nitrato (NO<sub>3</sub><sup>-</sup>). El nitrato es mucho menos tóxico para los peces y, ¡sorpresa!, es un excelente fertilizante para las plantas. Las plantas cultivadas en el sistema acuapónico absorben estos nitratos a través de sus raíces para crecer. Al hacer esto, las plantas actúan como un filtro natural, limpiando el agua de los nitratos antes de que esta regrese al tanque de los peces.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>En ambos sistemas, una de las funciones más importantes de los microorganismos es el reciclaje y la eliminación de sustancias tóxicas como el amonio (NH<sub>4</sub><sup>+</sup>) y el amoniaco (NH<sub>3</sub>) del agua de cultivo. Esta transformación no solo mantiene a los peces sanos, sino que también convierte un problema (los desechos) en una solución (alimento o fertilizante). Los microorganismos no solo realizan una tarea, sino que ofrecen múltiples beneficios al mismo tiempo: limpian el agua, producen alimento y pueden ayudar a proteger contra enfermedades, haciendo de estos sistemas una opción muy eficiente y completa.</p>
+            </section>
+
+            <section id="tipos-sistemas">
+                <h2>Sección 3: Tipos de Sistemas Simbióticos Prácticos para su Finca</h2>
+                <p>Ahora que conocemos los principios básicos, veamos qué tipos de sistemas de piscicultura simbiótica son más prácticos para implementar en una finca como la suya en Cimitarra. Nos enfocaremos en dos principales: el sistema Biofloc y el sistema Acuapónico, y mencionaremos brevemente una opción más avanzada.</p>
+                <h3>El Sistema Biofloc (BFT): Cultivando Peces y sus Propios "Copos de Alimento"</h3>
+                <p>Este sistema es uno de los más populares dentro de la acuicultura simbiótica y se está usando con éxito para criar tanto peces como camarones.</p>
+                <p><strong>¿Qué es el biofloc y cómo ayuda a sus peces?</strong> Como mencionamos antes, los "bioflóculos" son pequeñas agrupaciones o "copos" formados por una mezcla de microorganismos vivos (como bacterias, microalgas, protozoos) y partículas de materia orgánica (restos de alimento, heces) que flotan en el agua del estanque. Estos copos son el corazón del sistema. El sistema Biofloc se apoya en tres pilares fundamentales:</p>
+                <ul>
+                    <li>El desarrollo del biofloc en sí mismo: Se promueve el crecimiento de estas comunidades microbianas.</li>
+                    <li>Una fuente de carbono: Se añade regularmente una fuente de carbono (como la melaza o harinas, que actúan como "combustible" para las bacterias beneficiosas) para mantener un equilibrio adecuado con el nitrógeno de los desechos de los peces.</li>
+                    <li>Poca o ninguna renovación de agua: El agua se recircula dentro del mismo tanque y los recambios son mínimos o nulos, lo que ahorra este recurso.</li>
+                </ul>
+                <p>Estos bioflóculos cumplen dos funciones principales:</p>
+                <ul>
+                    <li><strong>Limpian el agua:</strong> Los microorganismos del biofloc, especialmente las bacterias heterótrofas, consumen el amonio y otros compuestos nitrogenados tóxicos que producen los peces, transformándolos en biomasa microbiana (es decir, en más microorganismos) que no es tóxica.</li>
+                    <li><strong>Sirven de alimento:</strong> Los bioflóculos son una fuente de alimento natural y constante para los peces. Son ricos en proteínas (pueden tener entre un 35% y un 50% de proteína), grasas (1% a 5%), vitaminas y minerales esenciales. Los peces pueden estar "picoteando" estos flóculos durante todo el día.</li>
+                </ul>
+                <p><strong>Ventajas principales del biofloc:</strong></p>
+                <ul>
+                    <li>Mejora la calidad del agua: Al transformar los desechos, se mantienen bajos los niveles de compuestos tóxicos.</li>
+                    <li>Fuente de alimento adicional y de calidad: Reduce la dependencia del alimento concentrado comprado y, por lo tanto, los costos de producción.</li>
+                    <li>Ahorro de agua significativo: Al no necesitar recambios frecuentes, se conserva agua, un gran beneficio en zonas donde es escasa o costosa. La principal pérdida de agua suele ser por evaporación.</li>
+                    <li>Mejora la salud de los peces: La presencia de bacterias probióticas en los flóculos y de compuestos como los β-glucanos (que vienen de hongos y levaduras) pueden fortalecer el sistema inmunológico de los peces, haciéndolos más resistentes a enfermedades.</li>
+                    <li>Permite mayor densidad de siembra: Se pueden criar más peces por metro cúbico de agua en comparación con los sistemas tradicionales, lo que significa una mayor producción en el mismo espacio.</li>
+                </ul>
+                <p>En resumen, con el sistema biofloc, usted no solo está criando peces, sino que también está "cultivando" activamente una comunidad de microorganismos que trabajan para usted, limpiando el agua y proporcionando alimento. Es un manejo más intensivo, pero con grandes recompensas.</p>
+
+                <h3>El Sistema Acuapónico: Peces que Ayudan a Crecer sus Plantas (y Viceversa)</h3>
+                <p>La acuaponía es otra forma fascinante de piscicultura simbiótica que combina la cría de peces con el cultivo de plantas de una manera muy ingeniosa.</p>
+                <p><strong>¿Qué es la acuaponía y cómo funciona esta alianza?</strong> La acuaponía es la integración de dos tecnologías: la acuicultura (cría de peces, generalmente en tanques) y la hidroponía (cultivo de plantas sin usar tierra, con las raíces en contacto con agua rica en nutrientes). El funcionamiento es un ciclo virtuoso:</p>
+                <ul>
+                    <li>Los peces en sus tanques producen desechos (principalmente amonio).</li>
+                    <li>El agua con estos desechos se bombea hacia las camas o canales donde crecen las plantas.</li>
+                    <li>En estas camas de cultivo (que pueden contener un sustrato como grava o arlita, o donde las raíces flotan directamente en el agua), viven bacterias beneficiosas. Estas bacterias transforman el amonio primero en nitritos y luego en nitratos.</li>
+                    <li>Los nitratos son un excelente fertilizante para las plantas, que los absorben a través de sus raíces para crecer.</li>
+                    <li>Al absorber los nitratos, las plantas limpian el agua.</li>
+                    <li>El agua limpia regresa entonces al tanque de los peces, y el ciclo comienza de nuevo. La acuaponía simbiótica va un paso más allá al incorporar fermentos (similares a los usados en biofloc) en los tanques de los peces y en la parte hidropónica, para potenciar la actividad microbiana, mejorar la calidad del agua, la nutrición y la salud de peces y plantas, y reducir enfermedades.</li>
+                </ul>
+                <p><strong>Ventajas de combinar peces y plantas:</strong></p>
+                <ul>
+                    <li>Producción doble con los mismos recursos (o menos): Se obtienen dos cosechas: pescado y vegetales (o frutas, hierbas aromáticas) del mismo sistema. Esto es una excelente forma de diversificar la producción en su finca.</li>
+                    <li>Ahorro extremo de agua: La acuaponía es muy eficiente en el uso del agua. Se dice que puede usar hasta 1/6 del agua que necesitaría la agricultura tradicional para producir 8 veces más alimento por hectárea. El agua recircula constantemente y las pérdidas son mínimas (principalmente por evaporación y transpiración de las plantas).</li>
+                    <li>Fertilizante natural y gratuito: Los desechos de los peces, una vez transformados por las bacterias, son el único fertilizante que necesitan las plantas. No hay necesidad de comprar ni usar fertilizantes químicos.</li>
+                    <li>Productos más sanos y limpios: Como no se usan pesticidas ni herbicidas (porque dañarían a los peces), los vegetales producidos son más naturales y saludables.</li>
+                    <li>Puede implementarse en espacios reducidos: Los sistemas acuapónicos se pueden adaptar a diferentes escalas, desde pequeños sistemas caseros hasta operaciones comerciales, y pueden aprovechar espacios que no son aptos para la agricultura tradicional.</li>
+                </ul>
+                <p>La acuaponía es un ejemplo perfecto de cómo imitar los ciclos de la naturaleza para producir alimentos de manera sostenible. Es una forma de "doble cosecha inteligente", donde los "desechos" de un componente del sistema se convierten en el "alimento" del otro, cerrando el ciclo y maximizando la eficiencia.</p>
+
+                <h3>Breve mención a la Acuicultura Multitrófica Integrada Simbiótica (AMTIS)</h3>
+                <p>Existe un concepto aún más integrado llamado Acuicultura Multitrófica Integrada Simbiótica (AMTIS). Piense en esto como llevar la simbiosis un nivel más arriba. En AMTIS, no solo se aprovechan los microorganismos (como en biofloc), sino que se cultivan diferentes especies acuáticas juntas, de manera que los desechos o el alimento no consumido por una especie sirven directamente como alimento para otra especie en el mismo sistema.</p>
+                <p>Por ejemplo, se puede cultivar tilapia junto con langostinos de agua dulce. La tilapia recibe su alimento, y los langostinos pueden alimentarse de las heces de la tilapia (que aún contienen nutrientes no digeridos) y del alimento que la tilapia no consumió, además de los bioflóculos y el zooplancton que se desarrollan en el sistema simbiótico. De esta forma, se aprovechan diferentes niveles tróficos (diferentes eslabones de la cadena alimenticia) en un mismo estanque.</p>
+                <p>La AMTIS es una tecnología muy prometedora, con potencial para reducir aún más los desechos y aumentar la eficiencia general del sistema. Sin embargo, su manejo puede ser más complejo que un sistema biofloc o acuapónico simple, ya que implica balancear las necesidades de múltiples especies cultivadas. Se la mencionamos para que conozca el potencial futuro de estas integraciones, pero para comenzar, el biofloc o la acuaponía son opciones más directas y accesibles para un productor que se inicia en la piscicultura simbiótica.</p>
+            </section>
+
+            <section id="implementacion">
+                <h2>Sección 4: ¡Manos a la Obra! Guía Práctica para Implementar su Sistema Simbiótico en Cimitarra</h2>
+                <p>Llegó el momento de hablar de cómo puede usted empezar a construir su propio sistema de piscicultura simbiótica. Esta sección le dará una guía práctica, enfocada en opciones artesanales y considerando las condiciones de su finca en Cimitarra.</p>
+                <h3>Consideraciones Iniciales para su Finca en Cimitarra</h3>
+                <p>Antes de empezar a construir, es importante pensar en algunos factores clave:</p>
+                <ul>
+                    <li><strong>El clima de Cimitarra y su influencia:</strong> Cimitarra, Santander, se caracteriza por tener un clima cálido. La temperatura promedio anual suele estar entre los 23°C y los 27.9°C, con una humedad relativa alta, que puede rondar el 80% en promedio. Las temperaturas máximas durante el día pueden alcanzar los 31-33°C o incluso más. Este clima cálido es, en general, favorable para las especies de peces que se adaptan bien a estas temperaturas. La alta temperatura también favorecerá la actividad de los microorganismos beneficiosos. Sin embargo, también puede aumentar la tasa de evaporación del agua.</li>
+                    <li><strong>Fuentes de agua disponibles en su finca:</strong> Evalúe con qué fuentes de agua cuenta (escorrentía, manantial, quebrada, pozo, recolección de agua lluvia). La calidad y cantidad de agua serán determinantes. La piscicultura simbiótica, especialmente biofloc, reduce la necesidad de recambiar agua.</li>
+                </ul>
+
+                <h3>Construyendo un Sistema Biofloc Artesanal</h3>
+                <p>El sistema biofloc es una excelente opción para empezar.</p>
+                <p><strong>Selección del lugar y tipo de estanque:</strong></p>
+                <ul>
+                    <li>Lugar: Plano o con pendiente suave, buena luz solar, espacio suficiente.</li>
+                    <li>Tipos de Estanques Artesanales:
+                        <ul>
+                            <li><strong>Tanques de geomembrana:</strong> Lona impermeable (PVC o HDPE, calibre 20 o más) dentro de una estructura (malla electrosoldada, madera tratada, bloques, metal). Preferiblemente circulares. Requieren preparación del terreno, instalación cuidadosa y sistema de drenaje.</li>
+                            <li><strong>Tanques IBC (Isotank o GRG):</strong> Contenedores de plástico de 1000 litros (1 m³) en jaula metálica. Económicos para empezar a pequeña escala. Deben limpiarse bien y adaptar la parte superior.</li>
+                        </ul>
+                    </li>
+                    <li>Profundidad ideal del agua: Alrededor de 1 metro para sistemas pequeños/medianos.</li>
+                </ul>
+                <p><strong>Preparación del agua e instalación del sistema de aireación:</strong></p>
+                <ul>
+                    <li>Llenado inicial: Agua limpia, sin cloro (dejar reposar si es de acueducto), pH ideal 6.5-7.5.</li>
+                    <li>Aireación (¡FUNDAMENTAL!): Constante (24h/día) y vigorosa. Vital para peces y microorganismos, y para mantener flóculos en suspensión.
+                        <ul>
+                            <li>Tipos de aireadores: Bombas de aire (sopladores/blowers) con mangueras difusoras o piedras difusoras.</li>
+                            <li>Recomendación: Tener sistema de respaldo por si falla el principal.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Creación y maduración del biofloc: el "caldo de cultivo"</strong></p>
+                <p>No meter peces inmediatamente. Primero crear y madurar el biofloc.</p>
+                <ul>
+                    <li>Fuente de carbono: Melaza (más común y económica), harina de yuca, harina de trigo, salvado de arroz, azúcar.</li>
+                    <li>Inóculo o probióticos: Para acelerar. Agua de un estanque biofloc maduro, probióticos comerciales (Bacillus, Lactobacillus, Saccharomyces cerevisiae), o pequeña cantidad de suelo de estanque sano.</li>
+                    <li>Proceso de maduración: 8-15 días o más. Se añade fuente de carbono e inóculo, aireación constante. Algunos añaden fuente de nitrógeno artificial (cloruro de amonio, urea) con cuidado al inicio.</li>
+                    <li>Monitoreo: Observar desarrollo de flóculos (muestra en cono Imhoff o botella, ideal 15-20 ml/L de flóculos sedimentables). Medir pH, amoniaco (debe bajar), oxígeno disuelto.</li>
+                </ul>
+
+                <h3>Construyendo un Sistema Acuapónico Casero</h3>
+                <p>Si le interesa producir peces y plantas juntos.</p>
+                <p><strong>Componentes básicos:</strong></p>
+                <ol>
+                    <li>Tanque para los peces: Similar a biofloc (plástico, geomembrana, IBC). Parte más baja.</li>
+                    <li>Jardinera o cama para las plantas: Encima del tanque de peces. Plástico, madera impermeabilizada. Profundidad 50-80 cm.</li>
+                    <li>Sustrato para las plantas: Material inerte y poroso. Arena lavada, fibra de coco, perlita, arlita (ideal).</li>
+                    <li>Sistema de bombeo de agua: Bomba sumergible pequeña (ej. 1200 L/h) o sistema "air lift".</li>
+                    <li>Tuberías: PVC. Una de la bomba a la jardinera (distribución), otra de desagüe de la jardinera al tanque de peces (por gravedad, ideal que caiga desde altura para oxigenar).</li>
+                </ol>
+                <p><strong>Montaje paso a paso (simplificado):</strong></p>
+                <ol>
+                    <li>Instale tanque de peces nivelado.</li>
+                    <li>Coloque jardinera más alta que el tanque de peces.</li>
+                    <li>Llene jardinera con sustrato lavado.</li>
+                    <li>Instale bomba en tanque de peces, conecte a jardinera.</li>
+                    <li>Asegure sistema de retorno de agua de jardinera a tanque de peces. El agua debe circular continuamente o la mayor parte del día.</li>
+                </ol>
+                <p><strong>Consideraciones sobre iluminación para las plantas:</strong> Necesitan luz. Ideal luz solar directa/indirecta. En interiores, luz artificial para plantas.</p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 1: Comparativa de Tipos de Estanques Artesanales para Pequeña Escala</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo de Estanque</th>
+                                <th>Materiales Principales</th>
+                                <th>Ventajas</th>
+                                <th>Desventajas</th>
+                                <th>Consideraciones de Costo Aproximado (COP)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Geomembrana con estructura</td>
+                                <td>Geomembrana (PVC/HDPE), malla electrosoldada, madera, tubos metálicos, bloques</td>
+                                <td>Durable, flexible en tamaño y forma, buena impermeabilización, se puede adaptar al terreno.</td>
+                                <td>Requiere más trabajo de construcción inicial, riesgo de punción si no se protege bien.</td>
+                                <td>Variable. Geomembrana: $79,900-$109,900 por m² o secciones pequeñas. Estructura: depende del material. Un tanque completo puede costar varios millones.</td>
+                            </tr>
+                            <tr>
+                                <td>Tanque IBC (Isotank / GRG 1000L)</td>
+                                <td>Plástico de alta densidad, estructura metálica externa</td>
+                                <td>Rápido de instalar, relativamente económico (especialmente si es usado), modular, bueno para empezar y experimentar.</td>
+                                <td>Volumen limitado (1000L), puede requerir limpieza profunda si fue usado con químicos.</td>
+                                <td>Usados: precio puede ser bajo. Nuevos: varía.</td>
+                            </tr>
+                            <tr>
+                                <td>Estanques excavados en tierra</td>
+                                <td>(No simbiótico directamente, pero base tradicional)</td>
+                                <td>Puede ser económico si se tiene maquinaria.</td>
+                                <td>Difícil control de calidad de agua, pérdidas por filtración, no ideal para biofloc intensivo.</td>
+                                <td>Costo de excavación.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 1: Para un campesino que inicia, la elección del tanque es crucial. Un tanque IBC es una forma excelente de empezar con biofloc o acuaponía a muy pequeña escala. Si luego desea expandir, los tanques de geomembrana ofrecen más versatilidad.</em></p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 2: Insumos Básicos para Iniciar un Sistema Biofloc Pequeño</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Insumo</th>
+                                <th>Propósito Principal en Biofloc</th>
+                                <th>Dónde Conseguirlo (General)</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Melaza (o similar fuente de C)</td>
+                                <td>"Alimento" para las bacterias heterótrofas, ayuda a balancear la relación Carbono:Nitrógeno (C:N).</td>
+                                <td>Ingenios azucareros, tiendas agropecuarias, distribuidores.</td>
+                                <td>Es la fuente de carbono más común y económica. Otras opciones: harina de yuca, azúcar, salvado de arroz.</td>
+                            </tr>
+                            <tr>
+                                <td>Sal (sin yodo)</td>
+                                <td>Ayuda a los peces a manejar el estrés durante el transporte y aclimatación, y puede ayudar a controlar nitritos al inicio.</td>
+                                <td>Supermercados, tiendas agropecuarias.</td>
+                                <td>Usar sal marina o sal para ganado (no la de cocina yodada).</td>
+                            </tr>
+                            <tr>
+                                <td>Bicarbonato de Sodio o Cal Agrícola</td>
+                                <td>Para aumentar y mantener la alcalinidad del agua, lo que ayuda a estabilizar el pH.</td>
+                                <td>Tiendas agropecuarias, ferreterías.</td>
+                                <td>La cal agrícola (carbonato de calcio) sube la alcalinidad y dureza. El bicarbonato de sodio sube la alcalinidad más directamente.</td>
+                            </tr>
+                            <tr>
+                                <td>Probiótico (opcional pero recomendado)</td>
+                                <td>Introduce bacterias beneficiosas para acelerar la maduración del biofloc y mejorar la salud del sistema.</td>
+                                <td>Tiendas especializadas en acuicultura, veterinarias.</td>
+                                <td>Puede ser un producto comercial o agua de un sistema biofloc ya establecido y sano. Ayuda a "sembrar" los microorganismos correctos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 2: Esta lista le da una idea de los "ingredientes" básicos. Entender para qué sirve cada uno le ayudará a manejar mejor su sistema.</em></p>
+                <p>Recuerde, la clave al construir su sistema es empezar de forma sencilla y a una escala que pueda manejar.</p>
+            </section>
+
+            <section id="especies">
+                <h2>Sección 5: Eligiendo sus Compañeros de Cultivo: Peces y Plantas para Cimitarra</h2>
+                <p>La elección correcta de especies es fundamental y debe basarse en el clima de Cimitarra, facilidad de manejo y mercado/consumo.</p>
+                <h3>Peces Recomendados para Clima Cálido (Cimitarra)</h3>
+                <ul>
+                    <li><strong>Tilapia (Mojarra roja o Tilapia nilótica - Oreochromis spp.):</strong>
+                        <ul>
+                            <li>Rusticidad: Muy resistente, ideal para principiantes.</li>
+                            <li>Temperatura óptima: 22°C - 30°C. pH ideal 5-9 (7.5 bueno). Oxígeno > 4 ppm.</li>
+                            <li>Sistemas simbióticos: Excelente para biofloc (consume flóculos) y acuaponía. Densidades 80-100 peces/m³.</li>
+                            <li>Alimentación: Omnívora. Acepta concentrado, se beneficia de bioflóculos/plancton.</li>
+                            <li>Mercado: Gran aceptación en Colombia.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cachama (Cachama blanca - Piaractus brachypomus o Cachama negra - Colossoma macropomum):</strong>
+                        <ul>
+                            <li>Rusticidad: Robusta y resistente.</li>
+                            <li>Temperatura óptima: 24°C - 29°C. pH ideal 6.5-8.5 (7.0 óptimo). Oxígeno > 4 ppm.</li>
+                            <li>Sistemas simbióticos: Se adapta bien, hay experiencias en biofloc (cultivo 4-5 meses).</li>
+                            <li>Alimentación: Omnívora (frutas, semillas, animales pequeños). Acepta concentrado.</li>
+                            <li>Mercado: Muy demandada en Colombia.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Bocachico (Prochilodus magdalenae):</strong>
+                        <ul>
+                            <li>Potencial nativo: Importancia económica y cultural.</li>
+                            <li>Temperatura y pH: Similar a cachama.</li>
+                            <li>Sistemas simbióticos (Biofloc): Investigaciones recientes muestran posible cría en biofloc (5-20 peces/m³, supervivencia >80%).</li>
+                            <li>Hábito alimenticio: Iliófago y detritívoro (lodo, detritos). Puede ayudar a consumir materia orgánica, pero podría afectar formación de flóculos si no se maneja bien.</li>
+                            <li>Consideración para principiantes: Requiere más ajustes que tilapia o cachama. Mejor empezar con tilapia/cachama y luego experimentar.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>Plantas Ideales para su Sistema Acuapónico en Clima Cálido (Cimitarra)</h3>
+                <p>Para empezar, se recomiendan hortalizas de hoja y aromáticas (ciclos cortos, menos exigentes).</p>
+                <ul>
+                    <li><strong>Hortalizas de hoja:</strong>
+                        <ul>
+                            <li>Lechuga (varias variedades): Crece bien y rápido. pH 6.0-7.0, Temp. 15°C-22°C (algunas tropicales toleran más calor).</li>
+                            <li>Otras: Espinaca, acelga, rúcula, col rizada (kale).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Plantas aromáticas:</strong>
+                        <ul>
+                            <li>Albahaca: Se adapta muy bien. pH 5.5-6.5, Temp. 20°C-25°C.</li>
+                            <li>Otras: Menta, orégano, cilantro, perejil.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Hortalizas de fruto:</strong> (Más exigentes, mejor con experiencia)
+                        <ul>
+                            <li>Tomate: pH 5.5-6.5, Temp. 15°C-25°C.</li>
+                            <li>Pepino: pH 5.5-6.5, Temp. 18°C-26°C.</li>
+                            <li>Pimentón, berenjena, fresas.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Otras plantas:</strong> Brócoli, coliflor, repollo, cebolla, zanahoria (algunas prefieren temp. más frescas).</li>
+                </ul>
+                <p>El clima cálido de Cimitarra es una ventaja. Considere la luz solar para las plantas.</p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 3: Peces Recomendados para Piscicultura Simbiótica en Clima Cálido (Cimitarra)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Especie</th>
+                                <th>Temperatura Óptima (°C)</th>
+                                <th>pH Óptimo</th>
+                                <th>Oxígeno Disuelto Mínimo (ppm)</th>
+                                <th>Rusticidad/Facilidad de Manejo (principiantes)</th>
+                                <th>Potencial en Biofloc</th>
+                                <th>Potencial en Acuaponía</th>
+                                <th>Tiempo Estimado a Cosecha (peso comercial)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tilapia (Roja o Nilótica)</td>
+                                <td>22-30</td>
+                                <td>5.0-9.0 (ideal 7.5)</td>
+                                <td>>4</td>
+                                <td>Muy Alta</td>
+                                <td>Excelente, consume flóculos</td>
+                                <td>Muy Bueno, la más común</td>
+                                <td>6-8 meses (350-500g)</td>
+                            </tr>
+                            <tr>
+                                <td>Cachama (Blanca o Negra)</td>
+                                <td>24-29</td>
+                                <td>6.5-8.5 (ideal 7.0)</td>
+                                <td>>4</td>
+                                <td>Alta</td>
+                                <td>Bueno, se adapta</td>
+                                <td>Bueno</td>
+                                <td>8-10 meses (500g-1kg)</td>
+                            </tr>
+                            <tr>
+                                <td>Bocachico (Prochilodus magdalenae)</td>
+                                <td>Similar a Cachama</td>
+                                <td>Similar a Cachama</td>
+                                <td>>4</td>
+                                <td>Media (en sistemas intensivos)</td>
+                                <td>Prometedor, pero requiere ajustes; consume detritos y puede afectar flóculos.</td>
+                                <td>Menos común, por investigar</td>
+                                <td>10-12 meses (250-350g)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <p><em>Nota sobre la Tabla 3: La tilapia es la más recomendada para empezar. La cachama es una excelente alternativa nativa. El bocachico tiene atractivo local, pero su cultivo en biofloc es más un área de desarrollo.</em></p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 4: Plantas Recomendadas para Acuaponía en Clima Cálido (Cimitarra)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo de Planta</th>
+                                <th>Ejemplos de Especies</th>
+                                <th>pH Óptimo</th>
+                                <th>Temperatura Óptima (°C)</th>
+                                <th>Exposición Solar Requerida</th>
+                                <th>Tiempo Estimado a Cosecha</th>
+                                <th>Nivel de Dificultad (principiantes en acuaponía)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hoja</td>
+                                <td>Lechuga, Espinaca, Acelga, Rúcula</td>
+                                <td>6.0-7.0</td>
+                                <td>15-25 (varía por especie)</td>
+                                <td>Moderada-Alta</td>
+                                <td>4-6 semanas</td>
+                                <td>Bajo</td>
+                            </tr>
+                            <tr>
+                                <td>Aromática</td>
+                                <td>Albahaca, Menta, Cilantro, Perejil, Orégano</td>
+                                <td>5.5-6.5</td>
+                                <td>20-25 (Albahaca)</td>
+                                <td>Moderada-Alta</td>
+                                <td>5-8 semanas</td>
+                                <td>Bajo a Medio</td>
+                            </tr>
+                            <tr>
+                                <td>Fruto</td>
+                                <td>Tomate, Pepino, Pimentón, Fresa</td>
+                                <td>5.5-6.5</td>
+                                <td>15-26 (varía por especie)</td>
+                                <td>Alta</td>
+                                <td>8-12+ semanas</td>
+                                <td>Medio a Alto (más exigentes en nutrientes)</td>
+                            </tr>
+                            <tr>
+                                <td>Otras</td>
+                                <td>Brócoli (prefiere clima más fresco), Cebolla, Zanahoria</td>
+                                <td>6.0-7.0</td>
+                                <td>10-20 (Brócoli)</td>
+                                <td>Moderada-Alta</td>
+                                <td>Variable</td>
+                                <td>Medio</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 4: Para la acuaponía, empezar con lechugas y albahaca es una excelente forma de aprender.</em></p>
+            </section>
+
+            <section id="manejo-diario">
+                <h2>Sección 6: El Día a Día en su Cultivo Simbiótico: Manejo y Cuidados Esenciales</h2>
+                <p>Estar atento a la calidad del agua y a las necesidades de los microorganismos es tan importante como cuidar a los peces.</p>
+                <h3>Calidad del Agua: La Clave del Éxito</h3>
+                <p>Parámetros importantes a vigilar y cómo medirlos de forma sencilla:</p>
+                <ul>
+                    <li><strong>Oxígeno disuelto (OD):</strong> > 4-5 mg/L. Medir con oxímetro digital o kits colorimétricos.</li>
+                    <li><strong>pH (acidez o alcalinidad):</strong> Biofloc 6.0-7.5, Acuaponía 6.0-7.0. Tilapia 5-9, Cachama 6.5-8.5. Medir con pHmetro digital o tiras/kits.</li>
+                    <li><strong>Alcalinidad:</strong> Capacidad del agua para resistir cambios de pH. Biofloc 100-150 mg/L (CaCO<sub>3</sub>). Cachama/Tilapia > 20-60 mg/L. Medir con kits de titulación.</li>
+                    <li><strong>Temperatura:</strong> Adecuada para la especie. Medir con termómetro sumergible.</li>
+                    <li><strong>Amonio (NH<sub>3</sub>/NH<sub>4</sub><sup>+</sup>) y Nitritos (NO<sub>2</sub><sup>-</sup>):</strong> Muy tóxicos. Deben ser muy bajos, cercanos a cero. Medir con kits colorimétricos.</li>
+                    <li><strong>Sólidos suspendidos (en biofloc):</strong> Cantidad de bioflóculos. Estimar con cono Imhoff (ideal 15-20 ml/L). SST < 500 mg/L.</li>
+                </ul>
+                <p><strong>Manejo de la relación Carbono: Nitrógeno (C:N) en sistemas biofloc:</strong></p>
+                <ul>
+                    <li>Importancia: Bacterias heterótrofas necesitan N (del amonio) y C (energía). Si hay poco C, no crecen y el amonio se acumula.</li>
+                    <li>Relación ideal: C:N entre 15:1 y 20:1. Alimento concentrado tiene C:N bajo (ej. 8:1 o 9:1).</li>
+                    <li>Qué agregar y cuánto: Añadir fuente de carbono (melaza). Por cada gramo de amonio a eliminar, ~12.5g de melaza (asume 48% C en melaza). Para neutralizar 1 mg/L de amoniaco (N), añadir 15-20 mg/L de carbono orgánico.</li>
+                    <li>Fuentes de carbono locales: Melaza, azúcar, harinas (yuca, trigo, arroz), afrecho.</li>
+                </ul>
+                <h3>Alimentación de los Peces</h3>
+                <ul>
+                    <li>Biofloc complementa dieta: Aporte extra de flóculos permite reducir concentrado en 20-30%.</li>
+                    <li>Tipos de alimento y frecuencia: Concentrado de buena calidad, 1-2 veces/día. Cantidad menor.</li>
+                    <li>¡Evite la sobrealimentación!: Crucial en sistemas cerrados. Alimento no consumido genera amonio, consume oxígeno. Observe comportamiento, retire alimento no consumido.</li>
+                    <li>Alimentos predigeridos o fermentados: Fermentos con harina de soya u otros granos + microorganismos beneficiosos. Mejora asimilación y valor nutritivo.</li>
+                </ul>
+                <h3>Limpieza y Mantenimiento Básico del Sistema</h3>
+                <ul>
+                    <li><strong>Biofloc:</strong> Sistema se "autolimpie". Puede acumularse exceso de sólidos (lodo) en el fondo. Purgar o sifonar periódicamente.</li>
+                    <li><strong>Acuaponía:</strong> Limpiar filtros mecánicos. Revisar tuberías. Cosechar plantas.</li>
+                    <li><strong>General:</strong> Mantener alrededores limpios.</li>
+                </ul>
+                <h3>Bioseguridad: Protegiendo su Inversión</h3>
+                <p>Medidas para prevenir entrada y propagación de enfermedades (principios de Resolución ICA 20186):</p>
+                <ul>
+                    <li>Controlar acceso.</li>
+                    <li>Limpieza y desinfección de equipos, herramientas, botas.</li>
+                    <li>Cuidado con peces nuevos: Proveedores confiables. Cuarentena si es posible.</li>
+                    <li>Manejo adecuado de la mortalidad: Retirar peces muertos rápido. Enterrarlos lejos de tanques/fuentes de agua, con cal.</li>
+                    <li>Llevar registros básicos: Mortalidades, comportamiento extraño, tratamientos.</li>
+                </ul>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 5: Parámetros Clave de Calidad de Agua y sus Rangos Óptimos</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Rango Óptimo General (Tilapia/Cachama en Biofloc/Acuaponía)</th>
+                                <th>Cómo Medirlo de Forma Sencilla</th>
+                                <th>Problemas si está Fuera de Rango</th>
+                                <th>Soluciones Prácticas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Oxígeno Disuelto (OD)</td>
+                                <td>>4-5 mg/L</td>
+                                <td>Oxímetro digital, kits colorimétricos</td>
+                                <td>Estrés, inapetencia, susceptibilidad a enfermedades, muerte de peces y microorganismos benéficos.</td>
+                                <td>Aumentar aireación, reducir densidad de siembra, reducir alimentación.</td>
+                            </tr>
+                            <tr>
+                                <td>pH</td>
+                                <td>Biofloc: 6.0-7.5 <br> Acuaponía: 6.0-7.0 <br> Peces: 6.5-8.5 (Tilapia hasta 5-9)</td>
+                                <td>pHmetro digital, tiras/kits colorimétricos</td>
+                                <td>Estrés, reducción del crecimiento, afecta actividad bacteriana, toxicidad del amonio aumenta con pH alto.</td>
+                                <td>Para subir pH bajo: Bicarbonato de sodio, cal agrícola (con cuidado). Para bajar pH alto: Recambios parciales (si es posible), manejo de alcalinidad, ácidos orgánicos (en acuaponía, con mucha precaución).</td>
+                            </tr>
+                            <tr>
+                                <td>Temperatura</td>
+                                <td>Específico de la especie (ej. Tilapia 22-30°C, Cachama 24-29°C)</td>
+                                <td>Termómetro</td>
+                                <td>Crecimiento lento, estrés, susceptibilidad a enfermedades si es muy alta o muy baja.</td>
+                                <td>Ubicar tanques para optimizar exposición solar (o sombra si es necesario), usar invernaderos en climas fríos (no aplica a Cimitarra).</td>
+                            </tr>
+                            <tr>
+                                <td>Amonio Total (NH<sub>3</sub>/NH<sub>4</sub><sup>+</sup>)</td>
+                                <td><1 mg/L (idealmente < 0.5 mg/L de NH<sub>3</sub> no ionizado)</td>
+                                <td>Kits colorimétricos</td>
+                                <td>Tóxico para los peces, estrés, daño a branquias, muerte.</td>
+                                <td>Biofloc: Asegurar buena relación C:N, buena aireación. <br> Acuaponía: Asegurar buen funcionamiento del filtro biológico, no sobrealimentar. <br> Recambio parcial de agua (como último recurso).</td>
+                            </tr>
+                            <tr>
+                                <td>Nitritos (NO<sub>2</sub><sup>-</sup>)</td>
+                                <td><0.5 mg/L (idealmente cercano a cero)</td>
+                                <td>Kits colorimétricos</td>
+                                <td>Muy tóxico ("enfermedad de la sangre marrón"), impide transporte de oxígeno, muerte.</td>
+                                <td>Biofloc: Buena aireación, relación C:N. <br> Acuaponía: Buen filtro biológico. <br> Adición de sal (cloruro de sodio) puede ayudar a reducir toxicidad del nitrito.</td>
+                            </tr>
+                            <tr>
+                                <td>Alcalinidad</td>
+                                <td>Biofloc: 100-150 mg/L CaCO<sub>3</sub> <br> General: >60 mg/L CaCO<sub>3</sub></td>
+                                <td>Kits de titulación</td>
+                                <td>Fluctuaciones grandes de pH, estrés en peces, afecta nitrificación.</td>
+                                <td>Adición de bicarbonato de sodio o carbonato de calcio (cal agrícola) para aumentarla.</td>
+                            </tr>
+                            <tr>
+                                <td>Sólidos Sedimentables (Biofloc)</td>
+                                <td>10-20 ml/L en cono Imhoff (hasta 50 ml/L en algunos casos)</td>
+                                <td>Cono Imhoff</td>
+                                <td>Demasiados sólidos: pueden obstruir branquias, consumir mucho oxígeno. Muy pocos: poca comida natural.</td>
+                                <td>Para reducir: Purgar lodos del fondo. Para aumentar: Adecuada relación C:N y tiempo de maduración.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 5: Esta tabla es una guía rápida. Aprender a medir estos parámetros es como tomarle el pulso a su sistema.</em></p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 6: Fuentes de Carbono Comunes para Sistemas Biofloc y Cálculo Aproximado de Adición</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fuente de Carbono</th>
+                                <th>Contenido Aproximado de Carbono (%)</th>
+                                <th>Cantidad Aproximada Necesaria para Aumentar C:N (Estimado)</th>
+                                <th>Consideraciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Melaza de caña</td>
+                                <td>40-50%</td>
+                                <td>Para neutralizar 1 g de Nitrógeno Amoniacal Total (NAT), se pueden necesitar aprox. 20-25 g de melaza (asumiendo 40% C y buscando C:N 20:1). Los cálculos varían.</td>
+                                <td>Muy usada, económica en zonas cañeras. Puede colorear el agua. Disolver bien antes de añadir.</td>
+                            </tr>
+                            <tr>
+                                <td>Azúcar (Sacarosa)</td>
+                                <td>~42%</td>
+                                <td>Similar a la melaza en términos de carbono puro, pero puede ser más costosa.</td>
+                                <td>Se disuelve fácilmente. Puede ser una opción si la melaza no está disponible.</td>
+                            </tr>
+                            <tr>
+                                <td>Harina de Yuca</td>
+                                <td>~40% (en base seca, varía)</td>
+                                <td>Se necesitaría una cantidad mayor en peso que la melaza para el mismo aporte de carbono.</td>
+                                <td>Disponible en muchas zonas tropicales. Debe ser finamente molida. Puede enturbiar el agua inicialmente.</td>
+                            </tr>
+                            <tr>
+                                <td>Salvado de Arroz/Trigo</td>
+                                <td>~40-45% (varía)</td>
+                                <td>Similar a la harina de yuca.</td>
+                                <td>Aporta fibra y otros nutrientes. Puede flotar si no se humedece bien.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 6: El manejo de la relación C:N es un arte. Añadir carbono gradualmente, observando el sistema.</em></p>
+            </section>
+
+            <section id="economia">
+                <h2>Sección 7: Consideraciones Económicas y Recursos Adicionales</h2>
+                <p>Iniciar cualquier proyecto productivo requiere pensar en los costos y en dónde encontrar ayuda.</p>
+                <h3>Estimación de costos iniciales para un sistema pequeño y artesanal</h3>
+                <p>Los precios varían. Aquí una lista de componentes y rangos estimados (COP):</p>
+                <ul>
+                    <li><strong>Tanque:</strong>
+                        <ul>
+                            <li>Geomembrana: PVC cal 20 (0.5mm) 4.8m ancho ~$109,900/m lineal. Rollo 50m PVC cal 500 (1.45m ancho) ~$3,200,000. Tanque fabricado ~$6,600,000.</li>
+                            <li>Estructura para geomembrana: Depende del material.</li>
+                            <li>Tanques IBC (1000L): Usados más económicos.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Sistema de Aireación (Biofloc):</strong>
+                        <ul>
+                            <li>Bombas de aire pequeñas: Desde ~$60,000. Sopladores (blowers) industriales (Resun GF-120) ~$572,000. Turbina aireadora (21,000 L/h) ~$731,000.</li>
+                            <li>Mangueras/piedras difusoras: Paq 10 piedras ~$25,668. Rollo 100m manguera difusora ~$1,216,399.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Bombas de agua (Acuaponía):</strong> Pequeñas desde ~$50,000.</li>
+                    <li><strong>Alevinos (tilapia/cachama):</strong> Precio varía. "Venta De Alevino: Bocachico, Cachama, Tilapia Roja" por $90,000 (probablemente lote). Contactar proveedores.</li>
+                    <li><strong>Insumos iniciales (biofloc):</strong> Melaza, sal, cal/bicarbonato (económicos). Probióticos ~$90,000.</li>
+                    <li><strong>Kits de análisis de agua:</strong>
+                        <ul>
+                            <li>Básicos (pH, amonio, nitritos): API Freshwater Master Test Kit ~$280,000-$300,000. Kits individuales ~$70,000-$120,000.</li>
+                            <li>Profesionales: Oxímetro digital, kit LaMotte AQ-2 (>$3,700,000). Para empezar, kits colorimétricos básicos son suficientes.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Costo total sistema acuapónico:</strong> Artículo menciona $20 millones (comercial). Casero/artesanal mucho menor.</li>
+                </ul>
+                <p>Clave: Empezar con inversión manejable. Biofloc en IBC 1000L puede ser inicio de bajo presupuesto.</p>
+                <h3>El mercado local en Cimitarra y Santander: ¿a quién vender sus peces?</h3>
+                <ul>
+                    <li>Consumo en Colombia: Bueno y creciendo. Tilapia >50% pescado de cultivo consumido.</li>
+                    <li>Demanda de Cachama: Excelente. Comercialización ~450g (4 meses cultivo).</li>
+                    <li>Opciones de venta:
+                        <ul>
+                            <li>Venta directa (mercados locales, finca).</li>
+                            <li>Restaurantes y tiendas locales.</li>
+                            <li>Intermediarios (precio menor).</li>
+                            <li>Organizaciones (FEDEACUA).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Investigar mercado local es fundamental.</p>
+                <h3>Recursos y apoyo</h3>
+                <ul>
+                    <li><strong>AUNAP (Autoridad Nacional de Acuicultura y Pesca):</strong> Guías prácticas, investigación, fomento.</li>
+                    <li><strong>SENA (Servicio Nacional de Aprendizaje):</strong> Cursos y capacitación técnica.</li>
+                    <li><strong>ICA (Instituto Colombiano Agropecuario):</strong> Autoridad sanitaria, requisitos bioseguridad (Res. 20186).</li>
+                    <li><strong>FAO (Organización de las Naciones Unidas para la Alimentación y la Agricultura):</strong> Manuales y guías técnicas gratuitas.</li>
+                    <li><strong>Universidades y Centros de Investigación:</strong> Información, asesoría.</li>
+                </ul>
+                <p>Información y capacitación son inversiones importantes.</p>
+
+                <div class="table-responsive my-6">
+                    <h4>Tabla 7: Estimación de Componentes Básicos y Costos Iniciales para un Sistema Pequeño (Ej. Biofloc 1000L o Acuapónico Casero)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Cantidad Estimada (Ejemplo)</th>
+                                <th>Rango de Precio Estimado (COP)</th>
+                                <th>Proveedor Potencial (General)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tanque IBC (1000L, usado en buen estado)</td>
+                                <td>1 unidad</td>
+                                <td>$200,000 - $500,000 (variable)</td>
+                                <td>Empresas de reciclaje, reventa industriales, MercadoLibre.</td>
+                            </tr>
+                            <tr>
+                                <td>Bomba de aire pequeña + manguera + difusor(es)</td>
+                                <td>1 kit</td>
+                                <td>$80,000 - $250,000</td>
+                                <td>Tiendas de acuarios, tiendas agropecuarias, MercadoLibre.</td>
+                            </tr>
+                            <tr>
+                                <td>Alevinos (Tilapia o Cachama)</td>
+                                <td>50-100 unidades</td>
+                                <td>$100 - $300 por alevino (muy variable)</td>
+                                <td>Criaderos de peces certificados, AUNAP podría orientar.</td>
+                            </tr>
+                            <tr>
+                                <td>Melaza</td>
+                                <td>1 bulto (20-50 kg)</td>
+                                <td>$30,000 - $80,000 por bulto</td>
+                                <td>Ingenios, tiendas agropecuarias.</td>
+                            </tr>
+                            <tr>
+                                <td>Sal (sin yodo, para ganado)</td>
+                                <td>1 bulto (20-50 kg)</td>
+                                <td>$20,000 - $50,000 por bulto</td>
+                                <td>Tiendas agropecuarias, supermercados.</td>
+                            </tr>
+                            <tr>
+                                <td>Bicarbonato de Sodio o Cal Agrícola</td>
+                                <td>5-10 kg</td>
+                                <td>$10,000 - $30,000</td>
+                                <td>Tiendas agropecuarias, ferreterías.</td>
+                            </tr>
+                            <tr>
+                                <td>Kit básico de análisis de agua (pH, NH<sub>3</sub>, NO<sub>2</sub>)</td>
+                                <td>1 kit</td>
+                                <td>$150,000 - $300,000</td>
+                                <td>Tiendas de acuarios, MercadoLibre.</td>
+                            </tr>
+                            <tr><td colspan="4" class="font-semibold bg-gray-50">Para Acuaponía (adicional):</td></tr>
+                            <tr>
+                                <td>Bomba de agua sumergible pequeña</td>
+                                <td>1 unidad</td>
+                                <td>$50,000 - $150,000</td>
+                                <td>Ferreterías, tiendas de acuarios.</td>
+                            </tr>
+                            <tr>
+                                <td>Sustrato (Arlita)</td>
+                                <td>2-3 bultos (para 1m²)</td>
+                                <td>$25,000 - $40,000 por bulto</td>
+                                <td>Viveros, tiendas de jardinería, MercadoLibre.</td>
+                            </tr>
+                            <tr>
+                                <td>Plántulas</td>
+                                <td>Variable</td>
+                                <td>Bajo costo</td>
+                                <td>Viveros, producción propia.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">TOTAL ESTIMADO INICIAL (Biofloc Básico)</td>
+                                <td colspan="2" class="font-bold text-right">$500,000 - $1,200,000 (muy aproximado)</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">TOTAL ESTIMADO INICIAL (Acuaponía Casera)</td>
+                                <td colspan="2" class="font-bold text-right">$600,000 - $1,500,000 (muy aproximado, sumando a biofloc básico)</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Nota sobre la Tabla 7: Costos son guía general. Cotizar precios exactos en su zona. Empezar con un solo tanque IBC para biofloc puede ser la opción más económica.</em></p>
+            </section>
+
+            <section id="final">
+                <h2>Sección 8: Primeros Pasos y Recomendaciones Finales</h2>
+                <p>Esperamos que la información le haya sido clara y útil.</p>
+                <h3>Resumen de los pasos clave para empezar:</h3>
+                <ol>
+                    <li>Infórmese bien y siga aprendiendo.</li>
+                    <li>Planifique su sistema con cuidado.</li>
+                    <li>Evalúe sus recursos honestamente.</li>
+                    <li>Construya su sistema a pequeña escala.</li>
+                    <li>Prepare el agua y madure el sistema con paciencia.</li>
+                    <li>Consiga alevinos de buena calidad.</li>
+                    <li>Maneje y monitoree su sistema con dedicación.</li>
+                    <li>Lleve registros sencillos.</li>
+                </ol>
+                <h3>Importancia de empezar a pequeña escala, aprender y luego expandir</h3>
+                <p>Estrategia más inteligente. Permite aprender cometiendo errores menos costosos. Aprendizaje práctico invaluable.</p>
+                <h3>Buscar asesoría local si es posible</h3>
+                <ul>
+                    <li>UMATA de Cimitarra.</li>
+                    <li>Otros piscicultores con experiencia.</li>
+                    <li>Técnicos del SENA o AUNAP.</li>
+                </ul>
+                <h3>Mensaje final de ánimo y perseverancia</h3>
+                <p>La piscicultura simbiótica es interesante y con gran potencial. Requiere aprendizaje, dedicación y paciencia. No se desanime. Con información correcta, cuidado y observación, puede dominar estas técnicas. Beneficios pueden ser muy gratificantes.</p>
+                <p>¡Le deseamos mucho éxito en su proyecto de piscicultura simbiótica en Cimitarra!</p>
+            </section>
+        </div>
+    </main>
+
+    <button id="scrollTopBtn" class="hidden fixed bottom-5 right-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; <span id="currentYear"></span> Guía de Piscicultura Simbiótica. Contenido adaptado del documento original.</p>
+    </footer>
+
+    <script>
+        // Menú Hamburguesa
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (para móviles)
+        const navLinks = menu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) { // md breakpoint
+                    menu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Botón Volver Arriba
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.classList.remove('hidden');
+                scrollTopBtn.classList.add('opacity-100');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+                scrollTopBtn.classList.remove('opacity-100');
+            }
+            // Activar enlace de navegación
+            highlightActiveLink();
+        };
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        // Resaltar enlace de navegación activo
+        const sections = document.querySelectorAll('section[id]');
+        const navbarItems = document.querySelectorAll('.navbar-item');
+
+        function highlightActiveLink() {
+            let scrollY = window.pageYOffset;
+            let currentSectionId = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Ajuste para el header fijo
+                const sectionHeight = section.offsetHeight;
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            // Si no hay sección activa (ej. al final de la página), resaltar la última
+            if (!currentSectionId && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                 const lastSection = sections[sections.length - 1];
+                 if (lastSection) {
+                    currentSectionId = lastSection.getAttribute('id');
+                 }
+            }
+
+
+            navbarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentSectionId}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        // Año actual en el footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Llamada inicial para resaltar enlace si la página se carga en una sección
+        highlightActiveLink();
+    </script>
+
+</body>
+</html>
